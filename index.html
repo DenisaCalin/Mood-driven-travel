@@ -8,6 +8,7 @@
   <title>LubDub</title>
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
@@ -214,108 +215,256 @@
       </div>
     </div>
   </header>
+
   <main>
     <section class="hero">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="./assets/images/hero-bg (1).jpg" alt="First Image">
-            <div class="img-shadow">
-            </div>
-            <div class="carousel-caption d-md-block">
-              <h5>First Image</h5>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="./assets/images/hero-bg-2 (1).jpg" alt="Second Image">
-            <div class="img-shadow">
-            </div>
-            <div class="carousel-caption d-md-block">
-              <h5>Second Image</h5>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="./assets/images/hero-bg-3 (2).jpg" alt="Third Image">
-            <div class="img-shadow">
-            </div>
-            <div class="carousel-caption d-md-block">
-              <h5>Third Image</h5>
-            </div>
-          </div>
-        </div>
-        <!-- Controls -->
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+      <div class="img-shadow">
       </div>
       <div class="container">
-        <div class="hero-content">
-          <h1>How do you want to feel in your next journey?</h1>
-          <p class="p-3">Travel more concious about what you want to feel & experience</p>
-          <span class="pt-5" uk-icon="icon: heart"></span>
-          <p class="p-2">Listen to your heart</p>
-          <button class="primary-btn unfilled" type="button" name="choose-travel-mood">CHOOSE YOUR TRAVEL MOOD</button>
+        <h1>How do you want to feel in your next journey?</h1>
+        <p class="p-5">Travel more concious about what you want to feel & experience</p>
+        <div class="row">
+          <div class="col">
+            <i class="fas fa-plug"></i>
+            <p class="p-2">Connect</p>
+          </div>
+          <div class="col">
+            <i class="far fa-heart"></i>
+            <p class="p-2">Listen to your heart</p>
+          </div>
+          <div class="col">
+            <i class="fas fa-plane"></i>
+            <p class="p-2">Experience</p>
+          </div>
         </div>
+        <button class="primary-btn p-4 unfilled" type="button" name="pick-travel-mood">PICK YOUR TRAVEL MOOD</button>
       </div>
-
-
     </section>
 
+    <section class="most-read">
+      <div class="container">
+        <div class="section-title pt-5 p-3">
+          Most read travel ideas
+        </div>
+        <div class="row row-wrap">
+          <div class="col col-md-6 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-getaway">
+                    Getaway
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col col-md-6 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-active">
+                    Active
+                  </span>
+                  <div class="title">
+                    City break in Prague
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col col-md-12 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-explore">
+                    EXPLORE
+                  </span>
+                  <div class="title title-full">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
 
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis dolorum dolores repellat fuga doloribus dolorem vitae iure in! Vel facilis officiis nam saepe, perspiciatis eos dicta accusamus quisquam dolor necessitatibus hic amet, sed, sit cum.
-    Voluptates, corporis, atque? Eveniet quo commodi consequuntur vero officia cum, iure et quas similique quam ullam eum, delectus, recusandae praesentium, debitis iusto earum minus ducimus ut officiis voluptatibus dolorem. Magni reprehenderit
-    officiis animi, voluptatem repellendus laborum corrupti molestias, autem distinctio obcaecati totam impedit, in optio modi doloribus, dignissimos perferendis nulla voluptas officia! Quos repellat dolor quae cupiditate veniam, tempore minus
-    laborum rem expedita molestiae fuga fugiat nihil eveniet alias rerum temporibus, nostrum ab exercitationem ducimus! Natus ea consectetur similique, doloremque, eos quod reiciendis earum quasi eius debitis consequatur qui reprehenderit ipsum
-    illum corrupti enim harum ab dolquam quas aliquid! Et dolorum earum tempora, nesciunt ab cupiditate corporis natus consequuntur labore, illum repudiandae quis,
-    accusamus similique blanditiis libero animi ipsam optio aspernatur fugiat ea minus ipsa. Sed reprehenderit suscipit asperiores enim ab alias quas, placeat nisi earum deserunt ducimus, quaerat autem quo est rem harum itaque laboriosam quis, fuga
-    quasi? Magnam tenetur, id temporibus. Asperiores cumque ratione nesciunt et similique aspernatur, consectetur aliquid earum non dolorum ipsum, eaque. Unde tempora eaque incidunt, fugiat, natus placeat voluptatibus veniam aliquam totam sint, nemo
-    impedit sunt veritatis? Quisquam, vel repellendus voluptatibus quis debitis odit dolorem veritatis sit ut id, repellat dolores praesentium quasi reprehenderit voluptatum reiciendis illum, assumenda tempore distinctio velit iusto facilis atque.
-    Est quasi recusandae dolor possimus cupiditate quia vitae, harum at quo totam fuga eius nam vero odio itaque eum, nulla, odit aspernatur quaerat quae sed eveniet ad porro, explicabo doloribus! Quidem id dolores illum beatae earum deserunt totam
-    hic cum perferendis blanditiis nostrum quisquam sit commodi enim voluptatum consequuntur alias at optio ut consectetur, sed corporis molestiae. Impedit nam libero earum sit quo laboriosam, repellat. Neque aspernatur maiores ratione facere, eaque
-    quod voluptate ipsum, unde animi exercitationem impedit, consectetur totam fuga. Hic sint delectus consequatur ratione porro quia at, nostrum? Iste maxime nemo, provident corrupti qui molestias consequatur quia, rem magni modi deserunt sint
-    vitae officia repudiandae enim minus aliquid mollitia itaque in hic voluptatum, vero tenetur natus. Incidunt maiores eius eum vel possimus! Iure voluptatibus, in accusantium possimus cupiditate animi at eveniet. Accusamus eius saepe quae
-    dignissimos ullam, quisquam ex repellendus optio necessitatibus ea quos ut. Id incidunt omnis deserunt maxime quaerat. Rerum omnis molestias eum reiciendis quam recusandae, possimus sint numquam tenetur velit, tempore! Ex minus optio quas
-    eveniet consectetur. Totam perspiciatis quibusdam iste repellat quod deserunt illo atque eligendi harum in, dolorem explicabo adipisci nisi est non et, fugit molestias dignissimos, laborum ratione alias assumenda. Quae cum beatae, recusandae
-    aperiam rerum harum dicta eius vero laudantium quas, quidem nobis voluptas pariatur explicabo unde sequi, dolores omnis optio laborum ex repudiandae delectus. Autem reiciendis dolor, quibusdam. Adipisci minima qui odit aut perferendis in, fuga
-    iusto. Enim vero voluptatem, reiciendis maiores magnam non quaerat, fuga, eveniet qui blanditiis fugiat. A quos dolorem voluptate ex illo repellat itaque cumque dolor, laboriosam porro culpa assumenda adipisci sequi tempora nemo impedit, amet
-    voluptatibus corrupti, vitae quae recusandae! Optio tempore laboriosam est vitae adipisci cum, deserunt molestias ut, unde excepturi saepe eveniet debitis quis doloremque, odio deleniti distinctio inventore consequuntur rerum quasi veritatis
-    recusandae enim corrupti quo. Sed quis quas corporis voluptate laborum nihil id, soluta numquam consequatur enim quos nostrum a cupiditate harum aliquam dolorem amet saepe suscipit fugiat dolorum dolores voluptatem accusamus sint deserunt
-    blanditiis. Vel, quidem modi impedit deleniti quos placeat. Ipsa fugiat distinctio dolor quibusdam esse nemo. Modi qui praesentium amet non laboriosam ipsa saepe atque, eveniet, molestiae cupiditate blanditiis eum nulla ea, assumenda asperiores
-    similique aut soluta! Illum architecto, unde quia atque! Repellat, explicabo et, totam, maiores quae excepturi fugit magnam eligendi neque est, facere aut eum consequuntur? Necessitatibus, dolorem distinctio natus tempora ducimus nisi optio
-    perferendis sint quaerat, deserunt saepe autem nostrum nemo omnis officia veritatis consectetur. Assumenda commodi voluptate eum laboriosam ratione placeat sunt velit veniam mollitia unde, ducimus suscipit porro molestias nemo quas? Ea quos
-    pariatur suscipit incidunt voluptatibus rem provident error, officia perspiciatis adipisci excepturi necessitatibus ipsum ratione eveniet possimus temporibus velit rerum similique quas deleniti sequi architecto. Numquam iure aspernatur optio
-    error nulla soluta, possimus at aliquid qui. Labore deleniti cumque praesentium culpa iure aliquid in, quasi amet voluptates fugit. Sapiente architecto, explicabo odio. Aperiam, totam obcaecati perspiciatis culpa sit voluptas, neque laudantium
-    soluta quia? Fugiat consequatur ipsam, aliquid veniam beatae! Mollitia modi ipsum facilis placeat minus aperiam asperiores doloribus sit ipsa alias dolorum et libero cum repellat quasi culpa, voluptas dolorem iusto autem soluta eius blanditiis
-    totam optio. Corporis quia, voluptate adipisci velit excepturi architecto cupiditate sapiente beatae placeat. Aliquam tempore saepe cupiditate labore, ex praesentium eius sit quibusdam placeat repudiandae, consectetur nesciunt aspernatur optio
-    fugit, iusto. Pariatur, labore magni asperiores beatae. Reprehenderit, architecto deleniti consectetur quo quam sapiente maiores vitae similique voluptas consequuntur provident ipsum impedit esse accusantium. A harum provident perspiciatis iure
-    labore, eligendi neque voluptatibus ducimus, ut molestiae optio incidunt pariatur aliquam fuga similique sequi cumque repudiandae explicabo accusantium obcaecati, iste laudantium at! Natus quos est aperiam iste sunt debitis reprehenderit sit rem
-    quo et vel harum a eius rerum esse, temporibus ad dolorem cum adipisci maiores inventore? Pariatur minima optio id ea distinctio, delectus. Veritatis nobis esse quae assumenda aperiam exercitationem placeat sit, vel, fuga ad autem, quis est
-    repellendus! Ipsa sapiente harum nihil omnis, neque ex veritatis, quas reprehenderit ea, expedita atque aliquid asperiores nesciunt. Reprehenderit quisquam odit ad cumque. Quisquam alias eveniet placeat illo corporis assumenda sapiente earum
-    pariatur, dignissimos reprehenderit sint tempore id ipsam porro error quasi harum exercitationem qui, quod nulla quia quas facilis, accusamus. Aut debitis, blanditiis quas ab ipsam, nihil sint ipsum dicta. Magnam ipsa, facilis nesciunt minus
-    dolores obcaecati consequatur, et, harum eaque at non accusantium corrupti adipisci nisi? Placeat nam ex amet quasi, in optio deserunt fugiat dicta doloribus dolorem tempora officiis aperiam debitis voluptates, laboriosam quis maxime impedit
-    minima earum fugit totam. Corporis distinctio ratione saepe similique doloremque quod praesentium hic error tenetur, at nulla exercitationem ipsa, odit non velit modi, labore harum dicta cupiditate atque vitae deserunt ut. Esse laboriosam,
-    deserunt aliquam dolorem. Minus facilis rer
+
+
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-relax">
+                    Relax
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-adventure">
+                    Adventure
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="img-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-romantic">
+                    romantic
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+      <div id="carousel-example-multi" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
+
+        <!--Controls-->
+        <div class="controls-top">
+          <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+          <a class="btn-floating" href="#carousel-example-multi" data-slide="next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <!--/.Controls-->
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-multi" data-slide-to="1"></li>
+          <li data-target="#carousel-example-multi" data-slide-to="2"></li>
+          <li data-target="#carousel-example-multi" data-slide-to="3"></li>
+          <li data-target="#carousel-example-multi" data-slide-to="4"></li>
+          <li data-target="#carousel-example-multi" data-slide-to="5"></li>
+        </ol>
+        <!--/.Indicators-->
+
+        <div class="carousel-inner v-2" role="listbox">
+
+          <div class="carousel-item active">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (36).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (34).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (38).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (29).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (30).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="col-12 col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/img (27).jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title font-weight-bold">Card title</h4>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <a class="btn btn-primary btn-md btn-rounded">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
   </main>
   <footer>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
 </body>
 
