@@ -444,6 +444,30 @@ nav {
   height: auto;
 }
 
+.active-mood {
+  background-image: url(../assets/images/active-mood.jpg);
+}
+
+.adventure-mood {
+  background-image: url(../assets/images/adventure-mood.jpg);
+}
+
+.getaway-mood {
+  background-image: url(../assets/images/getaway-mood.jpg);
+}
+
+.explore-mood {
+  background-image: url(../assets/images/explore-mood.jpg);
+}
+
+.relax-mood {
+  background-image: url(../assets/images/relax-mood.jpg);
+}
+
+.romantic-mood {
+  background-image: url(../assets/images/romantic-mood.jpg);
+}
+
 .hero,
 .hero-2,
 .hero-3 {
@@ -925,11 +949,11 @@ section .section-subtitle {
 
 .plans-list {
   list-style: none;
-  padding:0;
+  padding: 0;
   line-height: 1.8;
 }
 
-.plans-list ul{
+.plans-list ul {
   list-style: circle;
 }
 
@@ -938,7 +962,7 @@ section .section-subtitle {
 }
 
 .step .step-header {
-  padding:15px 0;
+  padding: 15px 0;
 }
 
 .step .step-title {
