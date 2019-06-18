@@ -132,3 +132,8 @@ if (formHolder) {
     `;
   }
 }
+
+let moduleTitles = document.querySelector(".module-title");
+moduleTitles.forEach(function(m){ 
+  document.write(m);
+});

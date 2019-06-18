@@ -923,6 +923,48 @@ section .section-subtitle {
   margin: 10px;
 }
 
+.plans-list {
+  list-style: none;
+  padding:0;
+  line-height: 1.8;
+}
+
+.plans-list ul{
+  list-style: circle;
+}
+
+.step {
+  margin-top: 30px;
+}
+
+.step .step-header {
+  padding:15px 0;
+}
+
+.step .step-title {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #182628;
+  margin: 0;
+  position: relative;
+}
+
+.step .step-title span {
+  padding-right: 15px;
+  background-color: white;
+}
+
+.step .step-title:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  border-top: 3px solid #57BA98;
+  z-index: -1;
+}
+
 footer {
   margin-top: 50px;
   padding: 50px 15px 0 15px;
