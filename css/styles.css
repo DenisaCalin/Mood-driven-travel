@@ -430,6 +430,8 @@ nav {
   z-index: 0;
 }
 
+
+
 .bg-container {
   width: 100%;
   min-height: 400px;
@@ -442,6 +444,15 @@ nav {
 .bg-container img {
   width: 100%;
   height: auto;
+}
+
+.bg-container-2{
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .active-mood {
@@ -468,9 +479,7 @@ nav {
   background-image: url(../assets/images/romantic-mood.jpg);
 }
 
-.hero,
-.hero-2,
-.hero-3 {
+.hero {
   position: relative;
   background-size: cover;
   background-position: center;
@@ -479,7 +488,7 @@ nav {
   min-height: 568px;
 }
 
-.hero {
+.hero-1 {
   background-image: url("../assets/images/hero-bg-1.jpg");
 }
 
@@ -491,17 +500,24 @@ nav {
   background-image: url("../assets/images/hero-bg-3.jpg");
 }
 
+.hero-half {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50vh;
+  min-height: 284px;
+}
+
 .hero h1,
-.hero-2 h1,
-.hero-3 h1 {
+.hero-half h1{
   font-weight: bold;
   letter-spacing: 2px;
   font-size: 44px;
 }
 
 .hero .container,
-.hero-2 .container,
-.hero-3 .container {
+.hero-half .container {
   padding-top: 80px;
   height: 100%;
   width: 100%;
@@ -517,13 +533,13 @@ nav {
   z-index: 1;
 }
 
-.hero .row {
+.hero-1 .row {
   padding: 30px 0;
   width: 100%;
   white-space: nowrap;
 }
 
-.hero i {
+.hero-1 i {
   font-size: 28px;
 }
 
@@ -1112,6 +1128,12 @@ footer .copyright {
     display: block;
     visibility: visible;
   }
+
+  .moods .row-invert .overlay {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+  }
 }
 
 @media (max-width: 992px) {
@@ -1273,7 +1295,7 @@ footer .copyright {
 }
 
 @media (max-width: 768px) {
-  .hero .row {
+  .hero-1 .row {
     display: none;
   }
 
