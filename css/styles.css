@@ -803,12 +803,12 @@ section .section-subtitle {
   background-color: #182628;
 }
 
-.with-auth-form .logo {
+.with-auth-form main .logo {
   max-width: 275px;
   margin: 60px auto 20px;
 }
 
-.with-auth-form .container {
+.with-auth-form main .container {
   min-width: 100%;
   display: flex;
   justify-content: center;
@@ -893,6 +893,10 @@ section .section-subtitle {
 
 .with-auth-form .form-content .with-checkbox label {
   font-size: 80%;
+}
+
+.with-auth-form footer{
+  margin-top:70px;
 }
 
 .flex-between {
