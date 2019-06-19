@@ -1,3 +1,94 @@
+<?php
+  require_once "./backend/idiorm.php";
+  session_start();
+
+  ORM::configure('mysql:host=localhost:3306;dbname=mooddriven');
+  ORM::configure('username','root');
+  ORM::configure('password', '');
+
+  function create_user($name,$email,$password){
+    $response = array(
+      'status'=>'success',
+      'message'=>''
+    );
+
+    if(email_exists($email)){
+      $response['status']='error';
+      $response['message']='This email already exists.';
+    }
+
+    if($response['status'] == 'success'){
+      $user = ORM::for_table('users')->create();
+      $user->name=$name;
+      $user->email = $email;
+      $user->password = $password;
+      $user->save();
+      $response['message']='User has been added.';
+    }
+    return $response;
+  }
+
+  function login_user($email,$password){
+    $response = array(
+      'status'=>'success',
+      'message'=>''
+    );
+
+    $user = ORM::for_table('users')->where(array(
+      'email' => $email,
+      'password' => $password
+    ))
+    ->find_one();
+
+    if($user != null){
+      $response['message'] = $user->name;
+    } else {
+      $response['status'] = 'error';
+      $response['message'] = 'Invalid email or password.';
+     }
+    return $response;
+  }
+
+  function email_exists($email){
+    $user = ORM::for_table('users')->where('email',$email)->find_one();
+    if($user != null){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  if (isset($_POST['signup-submit'])) {
+    $name = $_POST['first-last-name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $result=create_user($name, $email, $password);
+    if($result['status']=='error'){
+      $_SESSION['error']=$result['message'];
+      header('Location: ./pages/auth-form.php');
+    }
+  }
+
+  if (isset($_POST['login-submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $result=login_user($email, $password);
+    if($result['status']=='error'){
+      $_SESSION['error']=$result['message'];
+      header('Location: ./pages/auth-form.php');
+      // var_dump($_POST);
+    } else {
+        $_SESSION['username'] = $result['message'];
+    }
+  }
+
+  if (isset($_POST['logout-btn'])) {
+    session_unset();
+    session_destroy();
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,19 +96,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Plan Your Trip | MoodDriven</title>
-  <link rel="icon" type="image/png" href="../assets/images/explore-mood.jpg">
+  <title>MoodDriven</title>
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="../index.html" class="logo">
+        <a href="./index.html" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -130,10 +220,10 @@
           </div>
           <ul class="site-nav">
             <li class="dropdown-holder">
-              <a href="../pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
+              <a href="./pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
               <ul class="dropdown">
                 <li>
-                  <a href="../pages/active-mood.html">
+                  <a href="./pages/active-mood.html">
                     <div class="title">
                       Active
                     </div>
@@ -143,7 +233,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/adventure-mood.html">
+                  <a href="./pages/adventure-mood.html">
                     <div class="title">
                       Adventure
                     </div>
@@ -153,7 +243,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/getaway-mood.html">
+                  <a href="./pages/getaway-mood.html">
                     <div class="title">
                       Getaway
                     </div>
@@ -163,7 +253,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/explore-mood.html">
+                  <a href="./pages/explore-mood.html">
                     <div class="title">
                       Explore
                     </div>
@@ -173,7 +263,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/relax-mood.html">
+                  <a href="./pages/relax-mood.html">
                     <div class="title">
                       Relax
                     </div>
@@ -183,7 +273,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/romantic-mood.html">
+                  <a href="./pages/romantic-mood.html">
                     <div class="title">
                       Romantic
                     </div>
@@ -195,38 +285,226 @@
               </ul>
             </li>
             <li>
-              <a href="../pages/travel-plan.html">Travel Plan</a>
+              <a href="./pages/travel-plan.html">Travel Plan</a>
             </li>
-            <li class="">
-              <a href="../pages/wishlist.html">Wish List</a>
-            </li>
-          </ul>
-          <ul class="auth-nav">
+            <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
             <li>
-              <a href="../pages/auth-form.html" class="auth-button">Login</a>
+              <a href="./pages/wishlist.html">Wish List</a>
             </li>
-            <li>
-              <a href="../pages/auth-form.html" class="auth-button bordered-button">Sign Up</a>
-            </li>
+            <?php endif; ?>
           </ul>
+          <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+            <form class="auth-nav" action="./index.php" method="post">
+              <div class="username"><i class="far fa-user pr-3"></i><?php echo $_SESSION['username'] ?></div>
+              <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
+            </form>
+          <?php else :?>
+            <form class="auth-nav" action="./pages/auth-form.php" method="post">
+              <button type="submit" name="login-btn" class="auth-button">Login</button>
+              <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
+            </form>
+          <?php endif; ?>
         </nav>
       </div>
     </div>
   </header>
   <main>
-
-    <div class="hero-half active-mood">
+    <div class=" hero hero-1">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Travel Ideas</h1>
+        <h1>How do you want to feel in your next journey?</h1>
+        <p class="pt-5 pb-5">Travel more concious about what you want to feel & experience</p>
+        <div class="row">
+          <div class="col">
+            <i class="fas fa-plug"></i>
+            <p class="p-2">Connect</p>
+          </div>
+          <div class="col">
+            <i class="far fa-heart"></i>
+            <p class="p-2">Listen to your heart</p>
+          </div>
+          <div class="col">
+            <i class="fas fa-plane"></i>
+            <p class="p-2">Experience</p>
+          </div>
+        </div>
+        <a href= "./pages/travel-moods.html" class="primary-btn unfilled p-4">PICK YOUR TRAVEL MOOD</a>
       </div>
     </div>
+    <section class="most-read">
+      <div class="container">
+        <div class="section-title p-3">
+          Most read travel ideas
+        </div>
+        <div class="row row-wrap">
+          <div class="col col-md-6 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-active">
+                    Active
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col col-md-6 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/hero-bg-2.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-getaway">
+                    Getaway
+                  </span>
+                  <div class="title">
+                    Bahamas, perfect exotic trip destination
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col col-md-12 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/Duomo-in-Florence-Italy_feature.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-explore">
+                    EXPLORE
+                  </span>
+                  <div class="title title-full">
+                    Explore Florence in the dream citybreak
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
 
-    <div class="section">
 
 
-    </div>
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-relax">
+                    Relax
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-adventure">
+                    Adventure
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col col-md-4 col-sm-12 col-xs-12 p-3">
+            <div class="hovereffect">
+              <div class="bg-container" style="background-image:url(./assets/images/hero-bg.jpg);">
+              </div>
+              <a href="#">
+                <div class="overlay">
+                  <span class="ribbon ribbon-romantic">
+                    romantic
+                  </span>
+                  <div class="title">
+                    City break in Prague: 10 activities that connects you to the city's rhythm
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <section class="resources">
+      <div class="container with-carousel">
+        <div class="section-subtitle">
+          Are you looking for informations, resources and other details?
+        </div>
+        <div class="section-title p-3">
+          Access resources
+        </div>
+        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
+          <div class="carousel-inner row w-100 mx-auto" role="listbox">
+            <div class="carousel-item col-md-4 active">
+              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-equipment.png');">
+                <div class="banner-footer">
+                  <button type="button" name="button">Search for equipment</button>
+                  <span>Powered by Sports</span>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item col-md-4">
+              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-cazare.png');">
+                <div class="banner-footer">
+                  <button type="button" name="button">Search for housing</button>
+                  <span>Powered by Booking</span>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item col-md-4">
+              <a href="https://www.Airline.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-zbor.png');">
+                <div class="banner-footer">
+                  <button type="button" name="button">Search for flight</button>
+                  <span>Powered by Airline</span>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item col-md-4">
+              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-masina.png');">
+                <div class="banner-footer">
+                  <button type="button" name="button">Search for flight</button>
+                  <span>Powered by Booking</span>
+                </div>
+              </a>
+            </div>
+            <div class="carousel-item col-md-4">
+              <a href="https://www.TripGuide.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-guide.png');">
+                <div class="banner-footer">
+                  <button type="button" name="button">Search for guide</button>
+                  <span>Powered by TripGuide</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+            <span uk-icon="chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+            <span uk-icon="chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
   <footer>
     <div class="container">
@@ -339,14 +617,14 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text" href="../pages/travel-moods.html">TRAVEL MOODS</a>
+          <a class="heading-text" href="./pages/travel-moods.html">TRAVEL MOODS</a>
           <ul>
-            <li><a href="../pages/active-mood.html">Active</a></li>
-            <li><a href="../pages/adventure-mood.html">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.html">Getaway</a></li>
-            <li><a href="../pages/explore-mood.html">Explore</a></li>
-            <li><a href="../pages/relax-mood.html">Relax</a></li>
-            <li><a href="../pages/romantic-mood.html">Romantic</a></li>
+            <li><a href="./pages/active-mood.html">Active</a></li>
+            <li><a href="./pages/adventure-mood.html">Adventure</a></li>
+            <li><a href="./pages/getaway-mood.html">Getaway</a></li>
+            <li><a href="./pages/explore-mood.html">Explore</a></li>
+            <li><a href="./pages/relax-mood.html">Relax</a></li>
+            <li><a href="./pages/romantic-mood.html">Romantic</a></li>
           </ul>
         </div>
         <div class="col">
@@ -608,7 +886,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-  <script type="text/javascript" src="../js/scripts.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
 </body>
 
 </html>

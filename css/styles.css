@@ -34,6 +34,10 @@ nav {
   justify-content: space-between;
 }
 
+button:focus {
+  outline: none;
+}
+
 .st1 {
   display: inline;
   fill: #3ABC98;
@@ -334,12 +338,27 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
+}
+
+.auth-nav .username {
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #fff;
+  margin-right: 20px;
+  word-wrap: break-word;
 }
 
 .auth-button {
   color: #fff;
   padding: 6px 20px;
   display: block;
+  background: none;
+  border: none;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
 .auth-button:hover {
@@ -347,13 +366,12 @@ nav {
 }
 
 .auth-button.bordered-button {
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   color: #fff;
-  transition: 0.3s;
 }
 
 .auth-button.bordered-button:hover {
-  border: 1px solid #57BA98;
+  border: 2px solid #57BA98;
   color: #57BA98;
 }
 
@@ -430,8 +448,6 @@ nav {
   z-index: 0;
 }
 
-
-
 .bg-container {
   width: 100%;
   min-height: 400px;
@@ -446,7 +462,7 @@ nav {
   height: auto;
 }
 
-.bg-container-2{
+.bg-container-2 {
   width: 100%;
   height: 300px;
   overflow: hidden;
@@ -500,6 +516,10 @@ nav {
   background-image: url("../assets/images/hero-bg-3.jpg");
 }
 
+.hero-4 {
+  background-image: url("../assets/images/wishlist-bg.jpg");
+}
+
 .hero-half {
   position: relative;
   background-size: cover;
@@ -510,7 +530,7 @@ nav {
 }
 
 .hero h1,
-.hero-half h1{
+.hero-half h1 {
   font-weight: bold;
   letter-spacing: 2px;
   font-size: 44px;
@@ -557,10 +577,56 @@ nav {
   white-space: nowrap;
   letter-spacing: 1px;
   transition: 0.3s;
+  background-color: transparent;
 }
 
-.primary-btn:focus {
-  outline: none;
+.primary-btn.goto {
+  font-size: 16px;
+  font-weight: 600;
+  transition: none;
+}
+
+.primary-btn.goto:hover {
+  font-weight: 700;
+}
+
+.primary-btn.goto span {
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+.primary-btn.goto:hover span {
+  font-weight: 900;
+}
+
+.primary-btn.goto:hover span:first-child {
+  transition: 0.3s;
+}
+
+.primary-btn.goto:hover span:last-child {
+  transition: 1s;
+}
+
+.primary-btn.delete {
+  position: absolute;
+  right: 0;
+  color: red;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.primary-btn.delete i {
+  padding-right: 5px;
+  padding-bottom: 3px;
+}
+
+.primary-btn.delete:hover i {
+  transition: 0.3s;
+}
+
+.primary-btn.delete:hover i {
+  font-size: 18px;
 }
 
 .primary-btn.filled {
@@ -797,18 +863,26 @@ section .section-subtitle {
   opacity: 0.5;
 }
 
+.error {
+  width: 100%;
+  text-align: center;
+  color: red;
+  font-size: 12px;
+  padding: 10px;
+}
+
 .with-auth-form {
   min-height: 100vh;
   width: 100%;
   background-color: #182628;
 }
 
-.with-auth-form .logo {
+.with-auth-form main .logo {
   max-width: 275px;
   margin: 60px auto 20px;
 }
 
-.with-auth-form .container {
+.with-auth-form main .container {
   min-width: 100%;
   display: flex;
   justify-content: center;
@@ -893,6 +967,10 @@ section .section-subtitle {
 
 .with-auth-form .form-content .with-checkbox label {
   font-size: 80%;
+}
+
+.with-auth-form footer {
+  margin-top: 70px;
 }
 
 .flex-between {
@@ -1003,6 +1081,53 @@ section .section-subtitle {
   height: 15px;
   border-top: 3px solid #57BA98;
   z-index: -1;
+}
+
+.item-img {
+  width: 300px;
+  height: auto;
+}
+
+.item-img img {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+ul.wish-list {
+  padding: 0;
+}
+
+.wish-list li {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.wish-list li:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.wish-list li .item-info {
+  padding: 15px;
+  width: 100%;
+  position: relative;
+}
+
+.wish-list li .item-info img {
+  max-width: 30px;
+}
+
+.wish-list li .item-title {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.wish-list button {
+  border: none;
 }
 
 footer {
@@ -1222,7 +1347,7 @@ footer .copyright {
     justify-content: flex-start;
     align-items: flex-start;
     position: absolute;
-    top: 130px;
+    top: 170px;
     width: calc(100% - 60px);
     padding: 0;
     padding-bottom: 20px;
@@ -1283,6 +1408,12 @@ footer .copyright {
 
   .auth-nav {
     margin: 24px auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .auth-nav .username {
+    margin: 0 0 20px 0;
   }
 
   .banner-footer {
@@ -1351,6 +1482,32 @@ footer .copyright {
 
   .moods .description {
     padding-top: 25px;
+  }
+
+  .wish-list .item-info img {
+    width: 25px;
+  }
+
+  .wish-list li .item-title {
+    letter-spacing: 0;
+    font-size: 14px;
+  }
+
+  .wish-list li .item-info {
+    padding: 0;
+  }
+
+  .primary-btn.delete span {
+    display: none;
+  }
+
+  .primary-btn.goto {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .primary-btn.goto span {
+    color: #57BA98;
   }
 }
 

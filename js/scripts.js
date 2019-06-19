@@ -95,15 +95,15 @@ if (formHolder) {
     form.innerHTML = `
       <div class="input-block">
         <span uk-icon="icon: user"></span>
-        <input class="custom-input" type="text" name="first-last-name" value="" placeholder="First & Last name">
+        <input class="custom-input" type="text" name="first-last-name" value="" placeholder="First & Last name" required>
       </div>
       <div class="input-block">
         <span uk-icon="icon: mail"></span>
-        <input class="custom-input" type="email" name="email" value="" placeholder="Email">
+        <input class="custom-input" type="email" name="email" value="" placeholder="Email" required>
       </div>
       <div class="input-block">
         <span uk-icon="icon: lock"></span>
-        <input class="custom-input" type="password" name="password" value="" placeholder="Your password">
+        <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
       </div>
       <button class="primary-btn filled" type="submit" name="signup-submit">Create An Account</button>
     `;
@@ -115,11 +115,11 @@ if (formHolder) {
     form.innerHTML = `
       <div class="input-block">
         <span uk-icon="icon: user"></span>
-        <input class="custom-input" type="text" name="username-or-email" value="" placeholder="Your email">
+        <input class="custom-input" type="text" name="username-or-email" value="" placeholder="Your email" required>
       </div>
       <div class="input-block">
         <span uk-icon="icon: lock"></span>
-        <input class="custom-input" type="password" name="password" value="" placeholder="Your password">
+        <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
       </div>
       <div class="input-block flex-between">
         <div class="with-checkbox">
@@ -133,9 +133,7 @@ if (formHolder) {
   }
 }
 
-let moduleTitles = document.querySelector(".module-title");
-moduleTitles.forEach(function(m){
-  document.write(m);
-});
-
-$('.filter-basic').mdbFilter();
+// let moduleTitles = document.querySelector(".module-title");
+// moduleTitles.forEach(function(m){
+//   document.write(m);
+// });
