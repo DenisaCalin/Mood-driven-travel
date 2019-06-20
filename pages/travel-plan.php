@@ -17,7 +17,7 @@
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="../index.html" class="logo">
+        <a href="../index.php" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -130,10 +130,10 @@
           </div>
           <ul class="site-nav">
             <li class="dropdown-holder">
-              <a href="../pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
+              <a href="../pages/travel-moods.php">Travel Moods<span class="angle"></span></a>
               <ul class="dropdown">
                 <li>
-                  <a href="../pages/active-mood.html">
+                  <a href="../pages/active-mood.php">
                     <div class="title">
                       Active
                     </div>
@@ -143,7 +143,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/adventure-mood.html">
+                  <a href="../pages/adventure-mood.php">
                     <div class="title">
                       Adventure
                     </div>
@@ -153,7 +153,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/getaway-mood.html">
+                  <a href="../pages/getaway-mood.php">
                     <div class="title">
                       Getaway
                     </div>
@@ -163,7 +163,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/explore-mood.html">
+                  <a href="../pages/explore-mood.php">
                     <div class="title">
                       Explore
                     </div>
@@ -173,7 +173,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/relax-mood.html">
+                  <a href="../pages/relax-mood.php">
                     <div class="title">
                       Relax
                     </div>
@@ -183,7 +183,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/romantic-mood.html">
+                  <a href="../pages/romantic-mood.php">
                     <div class="title">
                       Romantic
                     </div>
@@ -195,18 +195,18 @@
               </ul>
             </li>
             <li>
-              <a href="../pages/travel-plan.html">Travel Plan</a>
+              <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
             <li class="">
-              <a href="../pages/wishlist.html">Wish List</a>
+              <a href="../pages/wishlist.php">Wish List</a>
             </li>
           </ul>
           <ul class="auth-nav">
             <li>
-              <a href="../pages/auth-form.html" class="auth-button">Login</a>
+              <a href="../pages/auth-form.php" class="auth-button">Login</a>
             </li>
             <li>
-              <a href="../pages/auth-form.html" class="auth-button bordered-button">Sign Up</a>
+              <a href="../pages/auth-form.php" class="auth-button bordered-button">Sign Up</a>
             </li>
           </ul>
         </nav>
@@ -214,17 +214,209 @@
     </div>
   </header>
   <main>
-
-    <div class="hero-half romantic-mood">
+    <div class="hero hero-3">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Romantic Mood</h1>
+        <h1>Plan the adventure of a lifetime</h1>
+        <p class="pt-5">An easier trip, starts every time with good plans. Here are helpful reminders for your trip, so you don't miss a beat.</p>
       </div>
     </div>
 
+    <div class="container">
+      <ul class="plans-list">
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Decide Where You Want To Go</span></h4>
+          </div>
+          <div class="step-body">
+            Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a definite
+            goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier as
+            well…because you know what to work towards.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Decide Where You Want To Go</span></h4>
+          </div>
+          <div class="step-body">
+            Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a definite
+            goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier as
+            well…because you know what to work towards.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Decide the Length of Your Trip</span></h4>
+          </div>
+          <div class="step-body">
+            How much does it cost to travel? I have no idea without knowing for how long you’re going away. You can’t figure out how much you need to save if you haven’t decided on how long you’ll be in your destination. After you say “I’m going to
+            Paris,” add “for 10 days.”</br>
+            Now, you have a concrete plan to work from. “I am going to Paris for 10 days” is a trip that you can plan for.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Research Your Costs</span></h4>
+          </div>
+          <div class="step-body">
+            So you know where you’re going and how long you’ll be there, but to really nail down how much money you need, your next task is to research the costs in your destination at the style of travel you want. </br>Do you want to backpack, or
+            would
+            you rather stay in luxury hotels? How much are hostels, hotels, restaurants, and attractions? Knowing will allow you to estimate how much money you’ll need for your trip. Here is how to research costs:
 
+            <ol>
+              <li>Buy a guidebook.</li>
+              <li> You can begin with my travel guide section.
+              </li>
+              <li> Ask on community websites like our forum and Facebook group or Lonely Planet.
+              </li>
+              <li> Google prices for specific things you want to do.
+              </li>
+            </ol>
+            You don’t need to do more than that. There’s so much information on the web that if you go down the rabbit hole of overplanning, you’ll get lost and confused by the firehose of information. Stick to those four things and you’ll be set!</br></br>
+            In our example, if you are going to Paris for 10 days and need $75 a day (not including your flight), you know you need to save $750 (though round up to $800 since it’s good to have extra) for your trip. If you were to travel around the
+            world for a year, you’d need $50 a day.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Start Saving Money</span></h4>
+          </div>
+          <div class="step-body">
+            Write down all your current expenses so you can determine where you are spending money and how you can cut back. People bleed a lot of money every day through small purchases: that bottle of water, the dollar for that snack, that extra
+            coffee. All of that adds up and creating this breakdown can let you know where you need to cut and save.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Get a Travels Rewards Credit Card</span></h4>
+          </div>
+          <div class="step-body">
+            While you’re working to save money, get a travel credit card so you can earn sign-up bonuses to redeem miles and points for free flights and hotel stays. Most cards have bonuses of up to 50,000 points when you meet their minimum spending
+            requirement (often $1,000 within a three-month period). That’s enough miles for a free flight almost anywhere in the world!
+            </br></br>
+            If you want a free flight, use the cards that help with that. If you want free hotel rooms, get a hotel card. You don’t need to sign up for very many cards; pick one or two and focus on those. Do this the moment you decide you want to
+            travel. Don’t wait — waiting equals lost miles, which means less free travel.
+            </br></br>
+            Collecting points and miles (which is called “travel hacking”) is what all the experts do to cut their costs and travel longer. </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Stay Focused and Inspired</span></h4>
+          </div>
+          <div class="step-body">
+            Keep feeding your desire to travel. Travel planning can be daunting and a lot of work and, if your friends and family aren’t that enthusiastic about it, it can be a little depressing because the support you’re looking for isn’t there.
+            Luckily, there are tons of ways to stay focused and keep your spirits lifted thanks to the amazing communities on internet.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Check for Last-Minute Deals</span></h4>
+          </div>
+          <div class="step-body">
+            Okay, you’re inspired, prepared, and on your way to saving money for your trip. But before you go buy that flight or book that hotel, check for deals you might have missed. You may dream of Paris but maybe there are great deals to Berlin
+            right now. Maybe you can get a seven-day cruise for 70% off, a package deal to Hawaii for the price of your flight to Paris, or 50% off sailing trips around Greece.
+            </br> </br>
+            It’s a big world, and there are lots of places I want to see, so if I end up choosing B over A, I’m happy! If you’re flexible too, make sure you look for any money-saving deals.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Book Your Flight</span></h4>
+          </div>
+          <div class="step-body">
+            After you’ve used your travel credit card and received your sign-up bonus, use your miles to book your flight. It is harder to use miles these days due to less availability, so make sure to book early to ensure you get your desired
+            flight.
+            </br>
+            There are still many ways to avoid being the person on the flight who paid the most. My favorite sites for finding cheap airfare:
+            <ul>
+              <li> Momondo – A great platform for finding really cheap flights.
+              </li>
+              <li> Skyscanner – Skyscanner is one of the best websites for searching multiple destinations at the same time.
+              </li>
+              <li> Kiwi – Kiwi is great for finding lesser-known routes or smaller carriers.
+              </li>
+              <li> AirTreks – AirTreks focuses exclusively on multi-destination RTW tickets.
+              </li>
+              <li> For the best deals, book your flight about two months in advance.
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Book Your Accommodation</span></h4>
+          </div>
+          <div class="step-body">
+            If you have a set schedule, feel free to book accommodation for the duration of your trip, but if you are going to be traveling long-term, book just the first few days. Once you know the dates you’ll be in your destination, there is no
+            real reason not to find a place to stay. My view is that waiting will just lead to you losing your top picks.
+            </br>
+            Love hotels? They won’t save you money, but you can sign up for some hotel credit cards and get free rooms, too.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Plan Your Activities</span></h4>
+          </div>
+          <div class="step-body">
+            Outline the major activities you want to enjoy and how much they cost. Make any last-minute adjustments to your savings so you can ensure you have enough money. This will also help you figure out if you need any reservations for your
+            chosen tours or activities.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Automate Your Bills</span></h4>
+          </div>
+          <div class="step-body">
+            Get rid of your mail, go paperless, and set up online bill payment for your recurring bills to ensure you won’t miss any while overseas. If you are still going to get paper mail, use a service like Earth Class Mail, which will collect
+            and
+            scan your mail for you. (If you are going on a two-week trip, you don’t really need to worry about this, so you can skip this step, too.)
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Tell Your Card Companies You’re Traveling</span></h4>
+          </div>
+          <div class="step-body">
+            No matter how long you’ll be gone, it’s a good idea to let your credit card companies know you will be overseas; that way any transactions that you make aren’t flagged as fraudulent and your card is less likely to be blocked. There’s
+            nothing worse than having to sit on the phone with your credit card company instead of enjoying your vacation.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Pack!</span></h4>
+          </div>
+          <div class="step-body">
+            Time to pack for your trip! While what you pack will depend on where you are going, remember that you don’t need to pack everything you own.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Buy Travel Insurance</span></h4>
+          </div>
+          <div class="step-body">
+            While a lot of people think, “I’m healthy, I don’t need travel insurance. I won’t get sick,” travel insurance is much more than just medical protection. It covers you when your camera breaks, your flight is canceled, a family member dies
+            and you have to come home, or if something gets stolen.
+
+            Travel insurance is something you will need on the road. You never know what might happen, and most health plans won’t cover you overseas.
+            </br>
+            Travel insurance is only a few dollars a day and only a fool doesn’t buy it.
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-header">
+            <h4 class="step-title"><span>Enjoy Your Trip</span></h4>
+          </div>
+          <div class="step-body">
+            Go on your trip and have fun! Head to the airport, board your plane (don’t forget your passport!), and enjoy the fruits of your labor. You’ve worked hard to get here. If you’re feeling nervous, don’t worry — that’s perfectly normal!
+            You’re
+            about to embark on an amazing adventure. </br>Trust your planning, follow your instincts, and you’ll have the trip of a lifetime.
+          </div>
+        </li>
+      </ul>
+    </div>
   </main>
+
   <footer>
     <div class="container">
       <div class="row row-wrap">
@@ -336,14 +528,14 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text" href="../pages/travel-moods.html">TRAVEL MOODS</a>
+          <a class="heading-text" href="../pages/travel-moods.php">TRAVEL MOODS</a>
           <ul>
-            <li><a href="../pages/active-mood.html">Active</a></li>
-            <li><a href="../pages/adventure-mood.html">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.html">Getaway</a></li>
-            <li><a href="../pages/explore-mood.html">Explore</a></li>
-            <li><a href="../pages/relax-mood.html">Relax</a></li>
-            <li><a href="../pages/romantic-mood.html">Romantic</a></li>
+            <li><a href="../pages/active-mood.php">Active</a></li>
+            <li><a href="../pages/adventure-mood.php">Adventure</a></li>
+            <li><a href="../pages/getaway-mood.php">Getaway</a></li>
+            <li><a href="../pages/explore-mood.php">Explore</a></li>
+            <li><a href="../pages/relax-mood.php">Relax</a></li>
+            <li><a href="../pages/romantic-mood.php">Romantic</a></li>
           </ul>
         </div>
         <div class="col">
@@ -605,9 +797,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
-
-
   <script type="text/javascript" src="../js/scripts.js"></script>
 </body>
 

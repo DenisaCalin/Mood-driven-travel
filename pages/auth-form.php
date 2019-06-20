@@ -521,14 +521,14 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text" href="../pages/travel-moods.html">TRAVEL MOODS</a>
+          <a class="heading-text" href="../pages/travel-moods.php">TRAVEL MOODS</a>
           <ul>
-            <li><a href="../pages/active-mood.html">Active</a></li>
-            <li><a href="../pages/adventure-mood.html">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.html">Getaway</a></li>
-            <li><a href="../pages/explore-mood.html">Explore</a></li>
-            <li><a href="../pages/relax-mood.html">Relax</a></li>
-            <li><a href="../pages/romantic-mood.html">Romantic</a></li>
+            <li><a href="../pages/active-mood.php">Active</a></li>
+            <li><a href="../pages/adventure-mood.php">Adventure</a></li>
+            <li><a href="../pages/getaway-mood.php">Getaway</a></li>
+            <li><a href="../pages/explore-mood.php">Explore</a></li>
+            <li><a href="../pages/relax-mood.php">Relax</a></li>
+            <li><a href="../pages/romantic-mood.php">Romantic</a></li>
           </ul>
         </div>
         <div class="col">

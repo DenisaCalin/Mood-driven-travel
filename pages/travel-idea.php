@@ -17,7 +17,7 @@
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="../index.html" class="logo">
+        <a href="../index.php" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -130,10 +130,10 @@
           </div>
           <ul class="site-nav">
             <li class="dropdown-holder">
-              <a href="../pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
+              <a href="../pages/travel-moods.php">Travel Moods<span class="angle"></span></a>
               <ul class="dropdown">
                 <li>
-                  <a href="#">
+                  <a href="../pages/active-mood.php">
                     <div class="title">
                       Active
                     </div>
@@ -143,7 +143,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../pages/adventure-mood.php">
                     <div class="title">
                       Adventure
                     </div>
@@ -153,7 +153,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../pages/getaway-mood.php">
                     <div class="title">
                       Getaway
                     </div>
@@ -163,7 +163,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../pages/explore-mood.php">
                     <div class="title">
                       Explore
                     </div>
@@ -173,7 +173,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../pages/relax-mood.php">
                     <div class="title">
                       Relax
                     </div>
@@ -183,7 +183,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../pages/romantic-mood.php">
                     <div class="title">
                       Romantic
                     </div>
@@ -195,18 +195,18 @@
               </ul>
             </li>
             <li>
-              <a href="../pages/travel-plan.html">Travel Plan</a>
+              <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
             <li class="">
-              <a href="#">Wish List</a>
+              <a href="../pages/wishlist.php">Wish List</a>
             </li>
           </ul>
           <ul class="auth-nav">
             <li>
-              <a href="../pages/auth-form.html" class="auth-button">Login</a>
+              <a href="../pages/auth-form.php" class="auth-button">Login</a>
             </li>
             <li>
-              <a href="../pages/auth-form.html" class="auth-button bordered-button">Sign Up</a>
+              <a href="../pages/auth-form.php" class="auth-button bordered-button">Sign Up</a>
             </li>
           </ul>
         </nav>
@@ -215,15 +215,18 @@
   </header>
   <main>
 
-    <div class="hero-half relax-mood">
+    <div class="hero-half active-mood">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Relax Mood</h1>
+        <h1>Travel Ideas</h1>
       </div>
     </div>
 
+    <div class="section">
 
+
+    </div>
   </main>
   <footer>
     <div class="container">
@@ -336,14 +339,14 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text" href="../pages/travel-moods.html">TRAVEL MOODS</a>
+          <a class="heading-text" href="../pages/travel-moods.php">TRAVEL MOODS</a>
           <ul>
-            <li><a href="../pages/active-mood.html">Active</a></li>
-            <li><a href="../pages/adventure-mood.html">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.html">Getaway</a></li>
-            <li><a href="../pages/explore-mood.html">Explore</a></li>
-            <li><a href="../pages/relax-mood.html">Relax</a></li>
-            <li><a href="../pages/romantic-mood.html">Romantic</a></li>
+            <li><a href="../pages/active-mood.php">Active</a></li>
+            <li><a href="../pages/adventure-mood.php">Adventure</a></li>
+            <li><a href="../pages/getaway-mood.php">Getaway</a></li>
+            <li><a href="../pages/explore-mood.php">Explore</a></li>
+            <li><a href="../pages/relax-mood.php">Relax</a></li>
+            <li><a href="../pages/romantic-mood.php">Romantic</a></li>
           </ul>
         </div>
         <div class="col">
@@ -605,9 +608,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
-
-
   <script type="text/javascript" src="../js/scripts.js"></script>
 </body>
 

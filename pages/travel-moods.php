@@ -1,3 +1,15 @@
+<?php
+  require_once "../backend/idiorm.php";
+  session_start();
+
+  ORM::configure('mysql:host=localhost:3306;dbname=mooddriven');
+  ORM::configure('username','root');
+  ORM::configure('password', '');
+
+  $moods = ORM::for_table('moods')->find_array();
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +17,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Plan Your Trip | MoodDriven</title>
-  <link rel="icon" type="image/png" href="../assets/images/explore-mood.jpg">
+  <title>Travel Moods</title>
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -17,7 +28,7 @@
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="../index.html" class="logo">
+        <a href="../index.php" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -130,10 +141,10 @@
           </div>
           <ul class="site-nav">
             <li class="dropdown-holder">
-              <a href="../pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
+              <a href="../pages/travel-moods.php">Travel Moods<span class="angle"></span></a>
               <ul class="dropdown">
                 <li>
-                  <a href="../pages/active-mood.html">
+                  <a href="../pages/active-mood.php">
                     <div class="title">
                       Active
                     </div>
@@ -143,7 +154,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/adventure-mood.html">
+                  <a href="../pages/adventure-mood.php">
                     <div class="title">
                       Adventure
                     </div>
@@ -153,7 +164,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/getaway-mood.html">
+                  <a href="../pages/getaway-mood.php">
                     <div class="title">
                       Getaway
                     </div>
@@ -163,7 +174,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/explore-mood.html">
+                  <a href="../pages/explore-mood.php">
                     <div class="title">
                       Explore
                     </div>
@@ -173,7 +184,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/relax-mood.html">
+                  <a href="../pages/relax-mood.php">
                     <div class="title">
                       Relax
                     </div>
@@ -183,7 +194,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="../pages/romantic-mood.html">
+                  <a href="../pages/romantic-mood.php">
                     <div class="title">
                       Romantic
                     </div>
@@ -195,36 +206,162 @@
               </ul>
             </li>
             <li>
-              <a href="../pages/travel-plan.html">Travel Plan</a>
+              <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
-            <li class="">
-              <a href="../pages/wishlist.html">Wish List</a>
-            </li>
+            <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+              <li>
+                <a href="../pages/wishlist.php">Wish List</a>
+              </li>
+            <?php endif; ?>
           </ul>
-          <ul class="auth-nav">
-            <li>
-              <a href="../pages/auth-form.html" class="auth-button">Login</a>
-            </li>
-            <li>
-              <a href="../pages/auth-form.html" class="auth-button bordered-button">Sign Up</a>
-            </li>
-          </ul>
+          <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+            <form class="auth-nav" action="../index.php" method="post">
+              <div class="username"><i class="far fa-user pr-3"></i>
+                <?php echo $_SESSION['username'] ?>
+              </div>
+              <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
+            </form>
+          <?php else :?>
+            <form class="auth-nav" action="../pages/auth-form.php" method="post">
+              <button type="submit" name="login-btn" class="auth-button">Login</button>
+              <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
+            </form>
+          <?php endif; ?>
         </nav>
       </div>
     </div>
   </header>
   <main>
-
-    <div class="hero-half adventure-mood">
+    <div class="hero hero-2">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Adventure Mood</h1>
+        <h1>By what mood are you driven today?</h1>
+        <p class="pt-5">Go, fly, roam, travel, voyage, explore, journey, discover, adventure.</p>
       </div>
     </div>
-
-
+    <section class="moods">
+      <div class="container">
+        <?php  if(isset($moods)) :?>
+          <?php foreach($moods as $key=>$mood) :?>
+            <div class="<?php echo ($key % 2 == 1)? "row row-invert":"row" ?>">
+              <div class="col col-lg-9 col-md-8">
+                <div class="bg-container" style="background-image: url(<?php echo $mood['bgImg']; ?>);">
+                </div>
+              </div>
+              <div class="col col-lg-3 col-md-4">
+                <div class="description">
+                  <img src="<?php echo $mood['icon']; ?>" alt="">
+                  <h5 class="m-3"><?php echo $mood['mood']; ?></h5>
+                  <p>
+                    Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
+                  </p>
+                  <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php endif; ?>
+        <div class="row">
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container active-mood">
+            </div>
+          </div>
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/active.svg" alt="">
+              <h5 class="m-3">Active</h5>
+              <p>
+                Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
+              </p>
+              <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
+            </div>
+          </div>
+        </div>
+        <div class="row row-invert">
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/adventure.svg" alt="">
+              <h5 class="m-3">Adventure</h5>
+              <p>
+                Typically bold, sometimes risk, undertaking. This kind of travel is for people passionate of extreme sensations.
+              </p>
+              <a href="../pages/adventure-mood.php" class="secondary-btn unfilled adventure-btn">Choose this mood</a>
+            </div>
+          </div>
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container adventure-mood">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container getaway-mood">
+            </div>
+          </div>
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/getaway.svg" alt="">
+              <h5 class="m-3">Getaway</h5>
+              <p>
+                When you feel caught between work and home you need an escape.
+              </p>
+              <a href="../pages/getaway-mood.php" class="secondary-btn unfilled getaway-btn">Choose this mood</a>
+            </div>
+          </div>
+        </div>
+        <div class="row row-invert">
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/explore.svg" alt="">
+              <h5 class="m-3">Explore</h5>
+              <p>
+                Everybody travels, but you want to travel “off the beaten track”. Discover.
+              </p>
+              <a href="../pages/explore-mood.php" class="secondary-btn unfilled explore-btn">Choose this mood</a>
+            </div>
+          </div>
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container explore-mood">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container relax-mood">
+            </div>
+          </div>
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/relax.svg" alt="">
+              <h5 class="m-3">Relax</h5>
+              <p>
+                When was the last time you spent a quiet moment just doing nothing - just sitting and looking at the sea, or watching the wind blowing the tree limbs, or waves rippling on a pond or children playing in the park?
+              </p>
+              <a href="../pages/relax-mood.php" class="secondary-btn unfilled relax-btn">Choose this mood</a>
+            </div>
+          </div>
+        </div>
+        <div class="row row-invert">
+          <div class="col col-lg-3 col-md-4">
+            <div class="description">
+              <img src="../assets/images/romantic.svg" alt="">
+              <h5 class="m-3">Romantic</h5>
+              <p>
+                What we find in a soulmate is not something wild to tame, but something wild to run with.
+              </p>
+              <a href="../pages/romantic-mood.php" class="secondary-btn unfilled romantic-btn">Choose this mood</a>
+            </div>
+          </div>
+          <div class="col col-lg-9 col-md-8">
+            <div class="bg-container romantic-mood">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
   <footer>
     <div class="container">
       <div class="row row-wrap">
@@ -336,14 +473,14 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text" href="../pages/travel-moods.html">TRAVEL MOODS</a>
+          <a class="heading-text" href="../pages/travel-moods.php">TRAVEL MOODS</a>
           <ul>
-            <li><a href="../pages/active-mood.html">Active</a></li>
-            <li><a href="../pages/adventure-mood.html">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.html">Getaway</a></li>
-            <li><a href="../pages/explore-mood.html">Explore</a></li>
-            <li><a href="../pages/relax-mood.html">Relax</a></li>
-            <li><a href="../pages/romantic-mood.html">Romantic</a></li>
+            <li><a href="../pages/active-mood.php">Active</a></li>
+            <li><a href="../pages/adventure-mood.php">Adventure</a></li>
+            <li><a href="../pages/getaway-mood.php">Getaway</a></li>
+            <li><a href="../pages/explore-mood.php">Explore</a></li>
+            <li><a href="../pages/relax-mood.php">Relax</a></li>
+            <li><a href="../pages/romantic-mood.php">Romantic</a></li>
           </ul>
         </div>
         <div class="col">
@@ -605,9 +742,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
-
-
   <script type="text/javascript" src="../js/scripts.js"></script>
 </body>
 

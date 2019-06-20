@@ -471,7 +471,8 @@ button:focus {
   background-repeat: no-repeat;
 }
 
-.active-mood {
+/* aici */
+/* .active-mood {
   background-image: url(../assets/images/active-mood.jpg);
 }
 
@@ -493,8 +494,7 @@ button:focus {
 
 .romantic-mood {
   background-image: url(../assets/images/romantic-mood.jpg);
-}
-
+} */
 .hero {
   position: relative;
   background-size: cover;
