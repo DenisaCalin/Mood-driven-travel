@@ -122,63 +122,65 @@
 
       <div class="form-holder">
         <div class="form-nav">
-          <?php if(isset($_POST['signup-btn'])) :?>
-          <div class="form-nav-item signup-toggle active">Sign Up</div>
-          <div class="form-nav-item login-toggle">Log in</div>
-        <?php else: ?>
-          <div class="form-nav-item signup-toggle">Sign Up</div>
-          <div class="form-nav-item login-toggle active">Log in</div>
-        <?php endif; ?>
+          <?php if(isset($_POST['signup-btn']) || isset($_SESSION['signup-submit'])) :?>
+            <div class="form-nav-item signup-toggle active">Sign Up</div>
+            <div class="form-nav-item login-toggle">Log in</div>
+          <?php else: ?>
+            <div class="form-nav-item signup-toggle">Sign Up</div>
+            <div class="form-nav-item login-toggle active">Log in</div>
+          <?php endif; ?>
         </div>
         <div class="form-content">
           <form action="../index.php" method="post">
-            <?php if(isset($_POST['signup-btn'])) :?>
-            <div class="input-block">
-              <span uk-icon="icon: user"></span>
-              <input class="custom-input" type="text" name="first-last-name" value="" placeholder="First & Last name" required>
-            </div>
-            <div class="input-block">
-              <span uk-icon="icon: mail"></span>
-              <input class="custom-input" type="email" name="email" value="" placeholder="Email" required>
-            </div>
-            <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
-            </div>
-            <?php if (isset($_SESSION["error"]) && !empty($_SESSION["error"])) {?>
-              <div class="error">
-                <?php
-                echo $_SESSION['error'];
-                $_SESSION['error']='';
-                ?>
+            <?php if(isset($_POST['signup-btn']) || isset($_SESSION['signup-submit'])) :?>
+              <div class="input-block">
+                <span uk-icon="icon: user"></span>
+                <input class="custom-input" type="text" name="first-last-name" value="" placeholder="First & Last name" required>
               </div>
-            <?php } ?>
-            <button class="primary-btn filled" type="submit" name="signup-submit">Create An Account</button>
-          <?php else: ?>
-            <div class="input-block">
-              <span uk-icon="icon: user"></span>
-              <input class="custom-input" type="text" name="email" value="" placeholder="Your email" required>
-            </div>
-            <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
-            </div>
-            <div class="input-block flex-between">
-              <div class="with-checkbox">
-                <input id="remember-me" type="checkbox" name="remember-me" value="">
-                <label for="remember-me">Remember me</label>
+              <div class="input-block">
+                <span uk-icon="icon: mail"></span>
+                <input class="custom-input" type="email" name="email" value="" placeholder="Email" required>
               </div>
-            </div>
-            <?php if (isset($_SESSION["error"]) && !empty($_SESSION["error"])) {?>
-              <div class="error">
-                <?php
-                echo $_SESSION['error'];
-                $_SESSION['error']='';
-                ?>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
               </div>
-            <?php } ?>
-            <button class="primary-btn filled" type="submit" name="login-submit">Log In</button>
-          <?php endif; ?>
+              <?php if (isset($_SESSION["error"]) && !empty($_SESSION["error"])) :?>
+                <div class="error">
+                  <?php
+                    echo $_SESSION['error'];
+                    $_SESSION['error']='';
+                  ?>
+                </div>
+              <?php endif; ?>
+              <button class="primary-btn filled" type="submit" name="signup-submit">Create An Account</button>
+              <?php unset($_SESSION['signup-submit']) ?>
+            <?php else: ?>
+              <div class="input-block">
+                <span uk-icon="icon: user"></span>
+                <input class="custom-input" type="text" name="email" value="" placeholder="Your email" required>
+              </div>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input class="custom-input" type="password" name="password" value="" placeholder="Your password" required>
+              </div>
+              <div class="input-block flex-between">
+                <div class="with-checkbox">
+                  <input id="remember-me" type="checkbox" name="remember-me" value="">
+                  <label for="remember-me">Remember me</label>
+                </div>
+              </div>
+              <?php if (isset($_SESSION["error"]) && !empty($_SESSION["error"])) {?>
+                <div class="error">
+                  <?php
+                  echo $_SESSION['error'];
+                  $_SESSION['error']='';
+                  ?>
+                </div>
+              <?php } ?>
+              <button class="primary-btn filled" type="submit" name="login-submit">Log In</button>
+              <?php unset($_SESSION['login-submit']) ?>
+            <?php endif; ?>
           </form>
         </div>
       </div>

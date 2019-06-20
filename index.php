@@ -65,6 +65,7 @@
     $result=create_user($name, $email, $password);
     if($result['status']=='error'){
       $_SESSION['error']=$result['message'];
+      $_SESSION['signup-submit'] = true;
       header('Location: ./pages/auth-form.php');
     }
   }
@@ -75,6 +76,7 @@
     $result=login_user($email, $password);
     if($result['status']=='error'){
       $_SESSION['error']=$result['message'];
+      $_SESSION['login-submit'] = true;
       header('Location: ./pages/auth-form.php');
       // var_dump($_POST);
     } else {
@@ -107,7 +109,7 @@
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="./index.html" class="logo">
+        <a href="./index.php" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -288,14 +290,16 @@
               <a href="./pages/travel-plan.html">Travel Plan</a>
             </li>
             <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
-            <li>
-              <a href="./pages/wishlist.html">Wish List</a>
-            </li>
+              <li>
+                <a href="./pages/wishlist.html">Wish List</a>
+              </li>
             <?php endif; ?>
           </ul>
           <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
             <form class="auth-nav" action="./index.php" method="post">
-              <div class="username"><i class="far fa-user pr-3"></i><?php echo $_SESSION['username'] ?></div>
+              <div class="username"><i class="far fa-user pr-3"></i>
+                <?php echo $_SESSION['username'] ?>
+              </div>
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
             </form>
           <?php else :?>

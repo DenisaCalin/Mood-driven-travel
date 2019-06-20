@@ -126,7 +126,6 @@ if (formHolder) {
           <input id="remember-me" type="checkbox" name="remember-me" value="">
           <label for="remember-me">Remember me</label>
         </div>
-        <a class="text-link small" href="#">Forgot your password?</a>
       </div>
       <button class="primary-btn filled" type="submit" name="login-submit">Log In</button>
     `;

@@ -868,7 +868,7 @@ section .section-subtitle {
   text-align: center;
   color: red;
   font-size: 12px;
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 .with-auth-form {
