@@ -1036,12 +1036,15 @@ section .section-subtitle {
   box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.5);
 }
 
-.moods img {
+.moods img,
+.idea img {
   max-width: 60px;
   margin: 10px;
 }
 
-.plans-list {
+.plans-list,
+.comment-list,
+.idea ul {
   list-style: none;
   padding: 0;
   line-height: 1.8;
@@ -1129,6 +1132,55 @@ ul.wish-list {
 .wish-list button {
   border: none;
 }
+
+.comments .panel-body {
+    max-height:650px;
+    overflow:auto;
+    text-align: right;
+}
+
+.comments .panel-body button {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.comments .panel-header {
+  letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #182628;
+    margin: 0;
+    position: relative;
+    padding-bottom:15px;
+}
+
+.comments .comment-list .comment img {
+    width:64px;
+    height:64px;
+    border:2px solid #e5e7e8;
+}
+
+.comments .comment-list {
+  text-align: left;
+}
+
+.comments .comment-list .comment {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+    display: flex;
+    align-items: center
+}
+
+.comments .comment-body {
+  position: relative;
+  width: 100%;
+}
+
+.comments .comment-time {
+  position: absolute;
+  right:0;
+}
+
+
 
 footer {
   margin-top: 50px;

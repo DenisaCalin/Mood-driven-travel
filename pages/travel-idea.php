@@ -202,9 +202,9 @@ session_start();
               <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
             <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
-              <li>
-                <a href="../pages/wishlist.php">Wish List</a>
-              </li>
+            <li>
+              <a href="../pages/wishlist.php">Wish List</a>
+            </li>
             <?php endif; ?>
           </ul>
           <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
@@ -226,18 +226,92 @@ session_start();
   </header>
   <main>
 
-    <div class="hero-half active-mood">
+    <div class="hero-half" style="background-image:url();">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Travel Ideas</h1>
+        <h1>Title</h1>
       </div>
     </div>
+    <section class="idea">
+      <div class="container">
+        <div class="idea-header">
+          <ul>
+            <li>
+              <img src="../assets/images/relax.svg" alt="mood-icon">
+              <span class="travel-mood">travel-mood</span>
+            </li>
+            <li>
+              <div class="destination">
+                destination
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="idea-body">
+          <ul class="plans-list">
+            <li class="step">
+              <div class="step-header">
+                <h4 class="step-title"><span>Short Description</span></h4>
+              </div>
+              <div class="step-body">
+                Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a
+                definite
+                goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier
+                as
+                well…because you know what to work towards.
+              </div>
+            </li>
+            <li class="step">
+              <div class="step-header">
+                <h4 class="step-title"><span>What to expect</span></h4>
+              </div>
+              <div class="step-body">
+                Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a
+                definite
+                goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier
+                as
+                well…because you know what to work towards.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <div class="section">
+    <section class="comments">
+      <div class="container">
+            <div class="comment-wrapper">
+              <div class="panel panel-info">
+                <h5 class="panel-header">
+                  Comment panel
+                </h5>
+                <div class="panel-body">
+                  <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                  <br>
+                  <button type="button" class="primary-btn filled">Post</button>
+                  <div class="clearfix"></div>
+                  <hr>
+                  <ul class="comment-list">
+                    <li class="comment">
+                      <div class="user-icon p-2">
+                        <img src="../assets/images/user.png" alt="">
+                      </div>
+                      <div class="comment-body">
+                        <span class="comment-time text-muted small">30 min ago</span>
+                        <span><strong>@JohnNida</strong></span>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
 
-
-    </div>
   </main>
   <footer>
     <div class="container">
