@@ -297,7 +297,7 @@
           </ul>
           <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
             <form class="auth-nav" action="./index.php" method="post">
-              <div class="username"><i class="far fa-user pr-3"></i>
+              <div class="username"><i class="far fa-user pr-2"></i>
                 <?php echo $_SESSION['username'] ?>
               </div>
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>

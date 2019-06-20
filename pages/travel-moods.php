@@ -216,7 +216,7 @@
           </ul>
           <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
             <form class="auth-nav" action="../index.php" method="post">
-              <div class="username"><i class="far fa-user pr-3"></i>
+              <div class="username"><i class="far fa-user pr-2"></i>
                 <?php echo $_SESSION['username'] ?>
               </div>
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
@@ -244,120 +244,44 @@
       <div class="container">
         <?php  if(isset($moods)) :?>
           <?php foreach($moods as $key=>$mood) :?>
-            <div class="<?php echo ($key % 2 == 1)? "row row-invert":"row" ?>">
-              <div class="col col-lg-9 col-md-8">
-                <div class="bg-container" style="background-image: url(<?php echo $mood['bgImg']; ?>);">
+            <?php if($key % 2 == 0): ?>
+              <div class="row">
+                <div class="col col-lg-9 col-md-8">
+                  <div class="bg-container" style="background-image: url(<?php echo $mood['bgImg']; ?>);">
+                  </div>
+                </div>
+                <div class="col col-lg-3 col-md-4">
+                  <div class="description">
+                    <img src="<?php echo $mood['icon']; ?>" alt="">
+                    <h5 class="m-3"><?php echo $mood['mood']; ?></h5>
+                    <p>
+                      Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
+                    </p>
+                    <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
+                  </div>
                 </div>
               </div>
-              <div class="col col-lg-3 col-md-4">
-                <div class="description">
-                  <img src="<?php echo $mood['icon']; ?>" alt="">
-                  <h5 class="m-3"><?php echo $mood['mood']; ?></h5>
-                  <p>
-                    Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
-                  </p>
-                  <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
+            <?php  else: ?>
+              <div class="row row-invert">
+                <div class="col col-lg-3 col-md-4">
+                  <div class="description">
+                    <img src="<?php echo $mood['icon']; ?>" alt="">
+                    <h5 class="m-3"><?php echo $mood['mood']; ?></h5>
+                    <p>
+                      Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
+                    </p>
+                    <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
+                  </div>
+                </div>
+                <div class="col col-lg-9 col-md-8">
+                  <div class="bg-container" style="background-image: url(<?php echo $mood['bgImg']; ?>);">
+                  </div>
                 </div>
               </div>
-            </div>
+            <?php endif; ?>
+
           <?php endforeach; ?>
         <?php endif; ?>
-        <div class="row">
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container active-mood">
-            </div>
-          </div>
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/active.svg" alt="">
-              <h5 class="m-3">Active</h5>
-              <p>
-                Activities, trips, walks, museums, climbs, downhills, streets, sidewalks, historic buildings, paintings and any other experiences you look for when you're in active mood travel.
-              </p>
-              <a href="../pages/active-mood.php" class="secondary-btn unfilled active-btn">Choose this mood</a>
-            </div>
-          </div>
-        </div>
-        <div class="row row-invert">
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/adventure.svg" alt="">
-              <h5 class="m-3">Adventure</h5>
-              <p>
-                Typically bold, sometimes risk, undertaking. This kind of travel is for people passionate of extreme sensations.
-              </p>
-              <a href="../pages/adventure-mood.php" class="secondary-btn unfilled adventure-btn">Choose this mood</a>
-            </div>
-          </div>
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container adventure-mood">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container getaway-mood">
-            </div>
-          </div>
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/getaway.svg" alt="">
-              <h5 class="m-3">Getaway</h5>
-              <p>
-                When you feel caught between work and home you need an escape.
-              </p>
-              <a href="../pages/getaway-mood.php" class="secondary-btn unfilled getaway-btn">Choose this mood</a>
-            </div>
-          </div>
-        </div>
-        <div class="row row-invert">
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/explore.svg" alt="">
-              <h5 class="m-3">Explore</h5>
-              <p>
-                Everybody travels, but you want to travel “off the beaten track”. Discover.
-              </p>
-              <a href="../pages/explore-mood.php" class="secondary-btn unfilled explore-btn">Choose this mood</a>
-            </div>
-          </div>
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container explore-mood">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container relax-mood">
-            </div>
-          </div>
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/relax.svg" alt="">
-              <h5 class="m-3">Relax</h5>
-              <p>
-                When was the last time you spent a quiet moment just doing nothing - just sitting and looking at the sea, or watching the wind blowing the tree limbs, or waves rippling on a pond or children playing in the park?
-              </p>
-              <a href="../pages/relax-mood.php" class="secondary-btn unfilled relax-btn">Choose this mood</a>
-            </div>
-          </div>
-        </div>
-        <div class="row row-invert">
-          <div class="col col-lg-3 col-md-4">
-            <div class="description">
-              <img src="../assets/images/romantic.svg" alt="">
-              <h5 class="m-3">Romantic</h5>
-              <p>
-                What we find in a soulmate is not something wild to tame, but something wild to run with.
-              </p>
-              <a href="../pages/romantic-mood.php" class="secondary-btn unfilled romantic-btn">Choose this mood</a>
-            </div>
-          </div>
-          <div class="col col-lg-9 col-md-8">
-            <div class="bg-container romantic-mood">
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   </main>

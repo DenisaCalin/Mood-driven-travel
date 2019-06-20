@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -197,18 +201,25 @@
             <li>
               <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
-            <li class="">
-              <a href="../pages/wishlist.php">Wish List</a>
-            </li>
+            <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+              <li>
+                <a href="../pages/wishlist.php">Wish List</a>
+              </li>
+            <?php endif; ?>
           </ul>
-          <ul class="auth-nav">
-            <li>
-              <a href="../pages/auth-form.php" class="auth-button">Login</a>
-            </li>
-            <li>
-              <a href="../pages/auth-form.php" class="auth-button bordered-button">Sign Up</a>
-            </li>
-          </ul>
+          <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+            <form class="auth-nav" action="../index.php" method="post">
+              <div class="username"><i class="far fa-user pr-2"></i>
+                <?php echo $_SESSION['username'] ?>
+              </div>
+              <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
+            </form>
+          <?php else :?>
+            <form class="auth-nav" action="../pages/auth-form.php" method="post">
+              <button type="submit" name="login-btn" class="auth-button">Login</button>
+              <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
+            </form>
+          <?php endif; ?>
         </nav>
       </div>
     </div>
