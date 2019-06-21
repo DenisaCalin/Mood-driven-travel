@@ -28,6 +28,58 @@ ORM::configure('password', '');
 //     'UNIQUE KEY mood (mood)) '
 //   );
 
+// ORM::get_db()->exec("DROP TABLE IF EXISTS ideas;");
+// ORM::get_db()->exec(
+//   'CREATE TABLE ideas ('.
+//     'id INT PRIMARY KEY AUTO_INCREMENT,' .
+//     'img VARCHAR(100) NOT NULL, ' .
+//     'mood_fk VARCHAR(20) NOT NULL, ' .
+//     'destination VARCHAR(50) NOT NULL,' .
+//     'title VARCHAR(100) NOT NULL, ' .
+//     'shortDescription VARCHAR(5000) NOT NULL, ' .
+//     'expectations VARCHAR(5000) NOT NULL, ' .
+//     'UNIQUE KEY id(id), ' .
+//     'UNIQUE KEY title(title), ' .
+//     'FOREIGN KEY (mood_fk) REFERENCES moods(mood))'
+//   );
+
+function create_idea($img, $mood_fk, $destination, $title, $shortDescription, $expectations){
+  $response = array(
+    'status'=>'success',
+    'message'=>''
+  );
+
+  if(idea_exists($title)){
+    $response['status']='error';
+    $response['message']='This idea already exists.';
+  }
+
+  if($response['status'] == 'success'){
+    $idea = ORM::for_table('ideas')->create();
+    $idea->img = $img;
+    $idea->mood_fk = $mood_fk;
+    $idea->destination = $destination;
+    $idea->title = $title;
+    $idea->shortDescription = $shortDescription;
+    $idea->expectations = $expectations;
+    $idea->save();
+    $response['message'] = 'Idea has been added.';
+  }
+
+  return $response;
+}
+
+
+function idea_exists($idea){
+  $idea = ORM::for_table('ideas')->where('title',$idea)->find_one();
+  if($idea != null){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
 function create_mood($bgImg, $name, $icon, $description){
   $response = array(
     'status'=>'success',
@@ -103,3 +155,5 @@ function email_exists($email){
 // create_mood('../assets/images/explore-mood.jpg', 'Explore', '../assets/images/explore.svg',"Everybody travels, but you want to travel “off the beaten track”. Discover." );
 // create_mood('../assets/images/relax-mood.jpg', 'Relax', '../assets/images/relax.svg',"When was the last time you spent a quiet moment just doing nothing - just sitting and looking at the sea, or watching the wind blowing the tree limbs, or waves rippling on a pond or children playing in the park?" );
 // create_mood('../assets/images/romantic-mood.jpg', 'Romantic', '../assets/images/romantic.svg',"What we find in a soulmate is not something wild to tame, but something wild to run with." );
+
+create_idea('../assets/images/active-mood.jpg','Active','guadalajara','Come to us, guadalajarians', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');

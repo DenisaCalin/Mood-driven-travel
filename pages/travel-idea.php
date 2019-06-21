@@ -1,6 +1,18 @@
 <?php
+require_once "../backend/idiorm.php";
 session_start();
- ?>
+
+ORM::configure('mysql:host=localhost:3306;dbname=mooddriven');
+ORM::configure('username','root');
+ORM::configure('password', '');
+$ideaTitle = 'Come to us, guadalajarians';
+
+$idea = ORM::for_table('ideas')
+  ->join('moods', array('ideas.mood_fk', '=', 'moods.mood'))
+  ->where('title', $ideaTitle)
+  ->find_one()
+  ->as_array();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +22,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Plan Your Trip | MoodDriven</title>
-  <link rel="icon" type="image/png" href="../assets/images/explore-mood.jpg">
+  <link rel="icon" type="image/png" href="../assets/images/road-trip.png">
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -226,11 +238,11 @@ session_start();
   </header>
   <main>
 
-    <div class="hero-half" style="background-image:url();">
+    <div class="hero-half" style="background-image:url(<?php echo $idea['img'] ?>);">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1>Title</h1>
+        <h1><?php echo $idea['title'] ?></h1>
       </div>
     </div>
     <section class="idea">
@@ -238,15 +250,17 @@ session_start();
         <div class="idea-header">
           <ul>
             <li>
-              <img src="../assets/images/relax.svg" alt="mood-icon">
-              <span class="travel-mood">travel-mood</span>
+              <img src="<?php echo $idea['icon']; ?>" alt="mood-icon">
+              <span class="travel-mood"><?php echo $idea['mood_fk'] ?></span>
             </li>
             <li>
-              <div class="destination">
-                destination
+              <div class="destination pt-3">
+                <i class="fas fa-map-marker-alt pr-2"></i> <span><?php echo $idea['destination'] ?></span>
               </div>
             </li>
           </ul>
+          <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
+
         </div>
         <div class="idea-body">
           <ul class="plans-list">
@@ -255,11 +269,7 @@ session_start();
                 <h4 class="step-title"><span>Short Description</span></h4>
               </div>
               <div class="step-body">
-                Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a
-                definite
-                goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier
-                as
-                well…because you know what to work towards.
+                <?php echo $idea['shortDescription'] ?>
               </div>
             </li>
             <li class="step">
@@ -267,11 +277,8 @@ session_start();
                 <h4 class="step-title"><span>What to expect</span></h4>
               </div>
               <div class="step-body">
-                Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a
-                definite
-                goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier
-                as
-                well…because you know what to work towards.
+                <?php echo $idea['expectations'] ?>
+
               </div>
             </li>
           </ul>
@@ -293,6 +300,30 @@ session_start();
                   <div class="clearfix"></div>
                   <hr>
                   <ul class="comment-list">
+                    <li class="comment">
+                      <div class="user-icon p-2">
+                        <img src="../assets/images/user.png" alt="">
+                      </div>
+                      <div class="comment-body">
+                        <span class="comment-time text-muted small">30 min ago</span>
+                        <span><strong>@JohnNida</strong></span>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                      </div>
+                    </li>
+                    <li class="comment">
+                      <div class="user-icon p-2">
+                        <img src="../assets/images/user.png" alt="">
+                      </div>
+                      <div class="comment-body">
+                        <span class="comment-time text-muted small">30 min ago</span>
+                        <span><strong>@JohnNida</strong></span>
+                        <div>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                      </div>
+                    </li>
                     <li class="comment">
                       <div class="user-icon p-2">
                         <img src="../assets/images/user.png" alt="">

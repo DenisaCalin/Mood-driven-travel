@@ -471,30 +471,6 @@ button:focus {
   background-repeat: no-repeat;
 }
 
-/* aici */
-/* .active-mood {
-  background-image: url(../assets/images/active-mood.jpg);
-}
-
-.adventure-mood {
-  background-image: url(../assets/images/adventure-mood.jpg);
-}
-
-.getaway-mood {
-  background-image: url(../assets/images/getaway-mood.jpg);
-}
-
-.explore-mood {
-  background-image: url(../assets/images/explore-mood.jpg);
-}
-
-.relax-mood {
-  background-image: url(../assets/images/relax-mood.jpg);
-}
-
-.romantic-mood {
-  background-image: url(../assets/images/romantic-mood.jpg);
-} */
 .hero {
   position: relative;
   background-size: cover;
@@ -616,6 +592,15 @@ button:focus {
   font-size: 14px;
 }
 
+.primary-btn.add-to-wishlist {
+  position: absolute;
+  right: 0;
+  color: #000;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .primary-btn.delete i {
   padding-right: 5px;
   padding-bottom: 3px;
@@ -675,6 +660,17 @@ section .section-title {
 section .section-subtitle {
   text-align: center;
   font-size: 14px;
+}
+
+.add-to-wishlist.added .uk-icon [STROKE*='#']:not(.uk-preserve) {
+  stroke: red;
+  fill: red;
+}
+
+.add-to-wishlist:hover .uk-icon [STROKE*='#']:not(.uk-preserve) {
+  stroke: red;
+  fill: red;
+  opacity: 0.5;
 }
 
 .ribbon {
@@ -1098,11 +1094,17 @@ section .section-subtitle {
   border-radius: 10px;
 }
 
-ul.wish-list {
+.travel-mood {
+  font-size: 18px;
+}
+
+ul.wish-list,
+ul.idea-list {
   padding: 0;
 }
 
-.wish-list li {
+.wish-list li,
+.idea-list li {
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1110,33 +1112,42 @@ ul.wish-list {
   border-radius: 10px;
 }
 
-.wish-list li:nth-child(even) {
+.wish-list li:nth-child(even),
+.idea-list li:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.wish-list li .item-info {
+.wish-list li .item-info,
+.idea-list li .item-info {
   padding: 15px;
   width: 100%;
   position: relative;
 }
 
-.wish-list li .item-info img {
+.wish-list li .item-info img,
+.idea-list li .item-info img {
   max-width: 30px;
 }
 
-.wish-list li .item-title {
+.wish-list li .item-title,
+.idea-list li .item-title {
   font-size: 18px;
   letter-spacing: 2px;
 }
 
-.wish-list button {
+.wish-list button,
+.idea-list button {
   border: none;
 }
 
+.idea-header li {
+  position: relative;
+}
+
 .comments .panel-body {
-    max-height:650px;
-    overflow:auto;
-    text-align: right;
+  max-height: 650px;
+  overflow: auto;
+  text-align: right;
 }
 
 .comments .panel-body button {
@@ -1146,17 +1157,17 @@ ul.wish-list {
 
 .comments .panel-header {
   letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #182628;
-    margin: 0;
-    position: relative;
-    padding-bottom:15px;
+  text-transform: uppercase;
+  color: #182628;
+  margin: 0;
+  position: relative;
+  padding-bottom: 15px;
 }
 
 .comments .comment-list .comment img {
-    width:64px;
-    height:64px;
-    border:2px solid #e5e7e8;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #e5e7e8;
 }
 
 .comments .comment-list {
@@ -1164,10 +1175,10 @@ ul.wish-list {
 }
 
 .comments .comment-list .comment {
-    border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
-    display: flex;
-    align-items: center
+  border-bottom: 1px dashed #efefef;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center
 }
 
 .comments .comment-body {
@@ -1177,10 +1188,8 @@ ul.wish-list {
 
 .comments .comment-time {
   position: absolute;
-  right:0;
+  right: 0;
 }
-
-
 
 footer {
   margin-top: 50px;
@@ -1549,7 +1558,8 @@ footer .copyright {
     padding: 0;
   }
 
-  .primary-btn.delete span {
+  .primary-btn.delete span,
+  .primary-btn.add-to-wishlist span:last-child {
     display: none;
   }
 

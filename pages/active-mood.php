@@ -7,7 +7,6 @@ ORM::configure('username','root');
 ORM::configure('password', '');
 
 $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array();
-
  ?>
 
  <!DOCTYPE html>
@@ -18,6 +17,7 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Plan Your Trip | MoodDriven</title>
+  <link rel="icon" type="image/png" href="../assets/images/road-trip.png">
   <link rel="icon" type="image/png" href="../assets/images/explore-mood.jpg">
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -241,6 +241,54 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
         <h1><?php  echo $mood['mood'] ?> Mood</h1>
       </div>
     </div>
+
+    <div class="container">
+      <ul class="idea-list">
+      <li class="item mt-3 mb-3">
+        <div class="item-img">
+          <img src="../assets/images/explore-mood.jpg" alt="smth">
+        </div>
+        <div class="item-info">
+          <div class="ml-3 mb-3 mt-1">
+            <img src="../assets/images/active.svg" alt="nnn">
+            <span class="small ml-2">Active</span>
+          </div>
+          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
+          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
+          <button class="primary-btn add-to-wishlist added" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span class="">Add to Wishlist</span> </button>
+        </div>
+      </li>
+      <li class="item mt-3 mb-3">
+        <div class="item-img">
+          <img src="../assets/images/explore-mood.jpg" alt="smth">
+        </div>
+        <div class="item-info">
+          <div class="ml-3 mb-3 mt-1">
+            <img src="../assets/images/active.svg" alt="nnn">
+            <span class="small ml-2">Active</span>
+          </div>
+          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
+          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
+          <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
+        </div>
+      </li>
+      <li class="item mt-3 mb-3">
+        <div class="item-img">
+          <img src="../assets/images/explore-mood.jpg" alt="smth">
+        </div>
+        <div class="item-info">
+          <div class="ml-3 mb-3 mt-1">
+            <img src="../assets/images/active.svg" alt="nnn">
+            <span class="small ml-2">Active</span>
+          </div>
+          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
+          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
+          <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 
   </main>
   <footer>
