@@ -1082,6 +1082,31 @@ section .section-subtitle {
   z-index: -1;
 }
 
+.step .step-subtitle {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #182628;
+  margin: 15px 0;
+  position: relative;
+  font-size: 14px;
+}
+
+.step .step-subtitle span {
+  padding-right: 10px;
+  background-color: white;
+}
+
+.step .step-subtitle:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 9px;
+  border-top: 2px dotted #57BA98;
+  z-index: -1;
+}
+
 .item-img {
   width: 300px;
   height: auto;

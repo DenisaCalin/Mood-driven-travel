@@ -278,6 +278,7 @@ $idea = ORM::for_table('ideas')
               </div>
               <div class="step-body">
                 <?php echo $idea['expectations'] ?>
+                <h5 class="step-subtitle"><span>Short Description</span></h5>
 
               </div>
             </li>
