@@ -246,21 +246,21 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
       <ul class="idea-list">
       <li class="item mt-3 mb-3">
         <div class="item-img">
-          <img src="../assets/images/explore-mood.jpg" alt="smth">
+          <img src="../assets/images/peru.jpg" alt="smth">
         </div>
         <div class="item-info">
           <div class="ml-3 mb-3 mt-1">
             <img src="../assets/images/active.svg" alt="nnn">
             <span class="small ml-2">Active</span>
           </div>
-          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
+          <div class="item-title ml-3 m-2"><strong>How to get to Machu Picchu</strong></div>
           <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
           <button class="primary-btn add-to-wishlist added" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span class="">Add to Wishlist</span> </button>
         </div>
       </li>
       <li class="item mt-3 mb-3">
         <div class="item-img">
-          <img src="../assets/images/explore-mood.jpg" alt="smth">
+          <img src="../assets/images/amsterdam.jpg" alt="smth">
         </div>
         <div class="item-info">
           <div class="ml-3 mb-3 mt-1">
