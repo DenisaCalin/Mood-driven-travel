@@ -425,9 +425,55 @@ button:focus {
   color: #182628;
 }
 
-.dropdown li a .description {
+.dropdown li a .description,
+#admin .motto {
   color: #3B945E;
   font-size: 12px;
+}
+
+#admin .row {
+  position: relative;
+}
+
+#admin .row .delete-shadow {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;  
+  transition: 0.3s;
+  visibility: hidden;
+  padding-right: -15px;  
+  padding-left: -15px;
+}
+
+#admin .row:hover .delete-shadow {
+  background-color: rgba(255, 0, 0, 0.2);
+  visibility: visible;
+}
+
+#admin .row:hover .cross {
+  display: inline;
+  opacity: 1;
+}
+
+#admin .row .cross {
+  font-size: 20px;
+  color: #c00101;
+  padding:10px;
+  transition: 0.3s;
+  display: none;  
+  opacity: 0;
+  top:6px;
+  right: 6px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 11;
+
 }
 
 .row {
@@ -494,6 +540,10 @@ button:focus {
 
 .hero-4 {
   background-image: url("../assets/images/wishlist-bg.jpg");
+}
+
+.hero-admin {
+  background-image: url("../assets/images/admin-bg.jpg");
 }
 
 .hero-half {
@@ -832,18 +882,19 @@ section .section-subtitle {
 }
 
 .container.with-carousel {
+  
   padding: 0;
 }
 
 .carousel-item {
-  transition: none;
+  transition: none; 
 }
 
 .carousel-control-next {
   /* right: -50px; */
   justify-content: flex-end;
   color: #182628;
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .carousel-control-next:hover,
@@ -856,7 +907,7 @@ section .section-subtitle {
 .carousel-control-prev {
   justify-content: flex-start;
   color: #182628;
-  opacity: 0.5;
+  opacity: 0;
 }
 
 .error {
@@ -1013,6 +1064,7 @@ section .section-subtitle {
 .moods .row {
   margin-bottom: 50px;
 }
+
 
 .moods .description {
   display: flex;
@@ -1276,6 +1328,13 @@ footer .social-link:hover i {
 footer .copyright {
   font-size: 12px;
   text-align: right;
+}
+
+#add-mood-form input, #add-mood-form textarea {
+  display: block;
+  width:100%;
+  margin-bottom: 15px;
+  padding: 5px;
 }
 
 @media (min-width: 768px) {

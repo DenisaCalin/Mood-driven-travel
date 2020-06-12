@@ -1,24 +1,12 @@
-<?php
-require_once "../backend/idiorm.php";
-session_start();
-
-ORM::configure('mysql:host=localhost:3306;dbname=mooddriven');
-ORM::configure('username','root');
-ORM::configure('password', '');
-
-$mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array();
- ?>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Plan Your Trip | MoodDriven</title>
+  <title>Travel Moods</title>
   <link rel="icon" type="image/png" href="../assets/images/road-trip.png">
-  <link rel="icon" type="image/png" href="../assets/images/explore-mood.jpg">
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -29,7 +17,7 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
   <header>
     <div class="sticky-part">
       <div class="container d-flex align-items-center">
-        <a href="../index.php" class="logo">
+        <a href="../index.html" class="logo">
           <span class="logo-name">MoodDriven</span>
           <div id="wrapper">
             <div id="car-body">
@@ -143,154 +131,50 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
           <ul class="site-nav">
             <li class="dropdown-holder">
               <a href="../pages/travel-moods.php">Travel Moods<span class="angle"></span></a>
-              <ul class="dropdown">
-                <li>
-                  <a href="../pages/active-mood.php">
-                    <div class="title">
-                      Active
-                    </div>
-                    <div class="description">
-                      if you feel energetic
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/adventure-mood.php">
-                    <div class="title">
-                      Adventure
-                    </div>
-                    <div class="description">
-                      if you are feeling daring
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/getaway-mood.php">
-                    <div class="title">
-                      Getaway
-                    </div>
-                    <div class="description">
-                      if you need a bolt of freedom
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/explore-mood.php">
-                    <div class="title">
-                      Explore
-                    </div>
-                    <div class="description">
-                      if you're curious
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/relax-mood.php">
-                    <div class="title">
-                      Relax
-                    </div>
-                    <div class="description">
-                      if you need to chill
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="../pages/romantic-mood.php">
-                    <div class="title">
-                      Romantic
-                    </div>
-                    <div class="description">
-                      if you are in love
-                    </div>
-                  </a>
-                </li>
+              <ul class="dropdown" id="moods-dropdown">
               </ul>
             </li>
             <li>
               <a href="../pages/travel-plan.php">Travel Plan</a>
             </li>
-            <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
+            <!-- <php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?> -->
               <li>
                 <a href="../pages/wishlist.php">Wish List</a>
               </li>
-            <?php endif; ?>
+            <!-- <php endif; ?> -->
           </ul>
-          <?php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?>
-            <form class="auth-nav" action="../index.php" method="post">
+          <!-- <php if(isset($_SESSION['username']) && !empty($_SESSION['username'])) :?> -->
+            <form class="auth-nav" action="../index.html" method="post">
               <div class="username"><i class="far fa-user pr-2"></i>
-                <?php echo $_SESSION['username'] ?>
+                <!-- <php echo $_SESSION['username'] ?> -->
               </div>
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
             </form>
-          <?php else :?>
+          <!-- <php else :?> -->
             <form class="auth-nav" action="../pages/auth-form.php" method="post">
               <button type="submit" name="login-btn" class="auth-button">Login</button>
               <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
             </form>
-          <?php endif; ?>
+          <!-- <php endif; ?> -->
         </nav>
       </div>
     </div>
   </header>
   <main>
-
-    <div class="hero-half" style="background-image:url(<?php echo $mood['bgImg'] ?>)">
+    <div class="hero hero-2">
       <div class="bg-shadow">
       </div>
       <div class="container">
-        <h1><?php  echo $mood['mood'] ?> Mood</h1>
+        <h1>By what mood are you driven today?</h1>
+        <p class="pt-5">Go, fly, roam, travel, voyage, explore, journey, discover, adventure.</p>
       </div>
     </div>
-
-    <div class="container">
-      <ul class="idea-list">
-      <li class="item mt-3 mb-3">
-        <div class="item-img">
-          <img src="../assets/images/explore-mood.jpg" alt="smth">
-        </div>
-        <div class="item-info">
-          <div class="ml-3 mb-3 mt-1">
-            <img src="../assets/images/active.svg" alt="nnn">
-            <span class="small ml-2">Active</span>
-          </div>
-          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
-          <button class="primary-btn add-to-wishlist added" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span class="">Add to Wishlist</span> </button>
-        </div>
-      </li>
-      <li class="item mt-3 mb-3">
-        <div class="item-img">
-          <img src="../assets/images/explore-mood.jpg" alt="smth">
-        </div>
-        <div class="item-info">
-          <div class="ml-3 mb-3 mt-1">
-            <img src="../assets/images/active.svg" alt="nnn">
-            <span class="small ml-2">Active</span>
-          </div>
-          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
-          <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
-        </div>
-      </li>
-      <li class="item mt-3 mb-3">
-        <div class="item-img">
-          <img src="../assets/images/explore-mood.jpg" alt="smth">
-        </div>
-        <div class="item-info">
-          <div class="ml-3 mb-3 mt-1">
-            <img src="../assets/images/active.svg" alt="nnn">
-            <span class="small ml-2">Active</span>
-          </div>
-          <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-          <button class="primary-btn goto" type="button" name="button">Go to<span>.</span><span>.</span><span>.</span></button>
-          <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-
+    <section class="moods">
+      <div class="container" id="moods-list-container">
+      </div>
+    </section>
   </main>
+
   <footer>
     <div class="container">
       <div class="row row-wrap">
@@ -403,13 +287,7 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
         </div>
         <div class="col">
           <a class="heading-text" href="../pages/travel-moods.php">TRAVEL MOODS</a>
-          <ul>
-            <li><a href="../pages/active-mood.php">Active</a></li>
-            <li><a href="../pages/adventure-mood.php">Adventure</a></li>
-            <li><a href="../pages/getaway-mood.php">Getaway</a></li>
-            <li><a href="../pages/explore-mood.php">Explore</a></li>
-            <li><a href="../pages/relax-mood.php">Relax</a></li>
-            <li><a href="../pages/romantic-mood.php">Romantic</a></li>
+          <ul id="moods-list">
           </ul>
         </div>
         <div class="col">
@@ -551,7 +429,7 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
                       <p>Effective date: June 17, 2019</p>
                       <p>MoodDrivenTravel ("us", "we", or "our") operates the www.mooddriventravel.ro website (the "Service").</p>
                       <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. Our Privacy Policy for MoodDrivenTravel is
-                        created with the help of the <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator.php">Free Privacy Policy Generator</a>.</p>
+                        created with the help of the <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/">Free Privacy Policy Generator</a>.</p>
                       <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in
                         this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from www.mooddriventravel.ro</p>
                       <h5><strong>Information Collection And Use</strong></h5>
@@ -666,12 +544,38 @@ $mood = ORM::for_table('moods')->where('mood', 'Active')->find_one()->as_array()
       </div>
     </div>
   </footer>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
 
+  
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script>
+  // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDes4MNsMsbQlXcaxfasVUCD-RF5R0gtlg",
+      authDomain: "dc-travel-mood.firebaseapp.com",
+      databaseURL: "https://dc-travel-mood.firebaseio.com",
+      projectId: "dc-travel-mood",
+      storageBucket: "dc-travel-mood.appspot.com",
+      messagingSenderId: "354399978499",
+      appId: "1:354399978499:web:6d93b9b76e53b60e393a36",
+      measurementId: "G-ZCHSFYLF15"
+    };
+    // Initialize Firebase
+    firebase.initializeApp( firebaseConfig );
+    const db = firebase.firestore();
+  </script>
 
   <script type="text/javascript" src="../js/scripts.js"></script>
 </body>
