@@ -43,6 +43,30 @@ ORM::configure('password', '');
 //     'FOREIGN KEY (mood_fk) REFERENCES moods(mood))'
 //   );
 
+// ORM::get_db()->exec("DROP TABLE IF EXISTS reviews;");
+// ORM::get_db()->exec(
+//   'CREATE TABLE reviews ('.
+//     'id INT PRIMARY KEY AUTO_INCREMENT,' .
+//     'review VARCHAR(5000) NOT NULL, ' .
+//     'added_date DATE NOT NULL, ' .
+//     'title_fk VARCHAR(100) NOT NULL, ' .
+//     'user_fk VARCHAR(50) NOT NULL,' .
+//     'UNIQUE KEY id(id), ' .
+//     'FOREIGN KEY (title_fk) REFERENCES ideas(title),' .
+//     'FOREIGN KEY (user_fk) REFERENCES users(email))'
+//   );
+
+// ORM::get_db()->exec("DROP TABLE IF EXISTS wishlist;");
+// ORM::get_db()->exec(
+//   'CREATE TABLE wishlist ('.
+//     'id INT PRIMARY KEY AUTO_INCREMENT,' .
+//     'title_fk VARCHAR(100) NOT NULL, ' .
+//     'user_fk VARCHAR(50) NOT NULL,' .
+//     'UNIQUE KEY id(id), ' .
+//     'FOREIGN KEY (user_fk) REFERENCES users(email),' .
+//     'FOREIGN KEY (title_fk) REFERENCES ideas(title))'
+//   );
+
 function create_idea($img, $mood_fk, $destination, $title, $shortDescription, $expectations){
   $response = array(
     'status'=>'success',
