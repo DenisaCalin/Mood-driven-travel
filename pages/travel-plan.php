@@ -215,7 +215,7 @@
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
             </form>
           <?php else :?>
-            <form class="auth-nav" action="../pages/auth-form.php" method="post">
+            <form class="auth-nav" action="../pages/auth-form.html" method="post">
               <button type="submit" name="login-btn" class="auth-button">Login</button>
               <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
             </form>
@@ -246,16 +246,7 @@
             well…because you know what to work towards.
           </div>
         </li>
-        <li class="step">
-          <div class="step-header">
-            <h4 class="step-title"><span>Decide Where You Want To Go</span></h4>
-          </div>
-          <div class="step-body">
-            Defining where you want to go sets a goal to work toward. A lot of people talk vaguely about travel. They never say where they are going, just that they are going. Picking a destination is immensely important, as it gives you a definite
-            goal. It’s a lot easier to mentally get behind “I am going to Paris” than “I’m going to Europe” or “I’m going somewhere.” Not only will your trip become more concrete for you and easier to commit to, but it will make planning easier as
-            well…because you know what to work towards.
-          </div>
-        </li>
+        
         <li class="step">
           <div class="step-header">
             <h4 class="step-title"><span>Decide the Length of Your Trip</span></h4>

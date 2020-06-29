@@ -210,8 +210,8 @@
             </form>
           <!-- <php else :?> -->
             <form class="auth-nav" action="./pages/auth-form.html" method="post">
-              <button type="submit" name="login-btn" class="auth-button">Login</button>
-              <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
+              <button name="login-btn" class="auth-button">Login</button>
+              <button name="signup-btn" class="auth-button bordered-button">Sign Up</button>
             </form>
           <!-- <php endif; ?> -->
         </nav>
@@ -390,7 +390,7 @@
             <div class="carousel-item col-md-4">
               <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-masina.png');">
                 <div class="banner-footer">
-                  <button type="button" name="button">Search for flight</button>
+                  <button type="button" name="button">Search for car</button>
                   <span>Powered by Booking</span>
                 </div>
               </a>
@@ -415,6 +415,8 @@
         </div>
       </div>
     </section>
+
+
   </main>
 
   <footer>
@@ -823,6 +825,7 @@
     firebase.initializeApp( firebaseConfig );
     const db = firebase.firestore();
   </script>
+  <script type="text/javascript" src="js/firebase.js"></script>
 
   <script type="text/javascript" src="js/scripts.js"></script>
 </body>

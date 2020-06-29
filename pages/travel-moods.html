@@ -151,7 +151,7 @@
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
             </form>
           <!-- <php else :?> -->
-            <form class="auth-nav" action="../pages/auth-form.php" method="post">
+            <form class="auth-nav" action="../pages/auth-form.html" method="post">
               <button type="submit" name="login-btn" class="auth-button">Login</button>
               <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
             </form>
@@ -574,8 +574,8 @@
     };
     // Initialize Firebase
     firebase.initializeApp( firebaseConfig );
-    const db = firebase.firestore();
   </script>
+    <script type="text/javascript" src="../js/firebase.js"></script>
 
   <script type="text/javascript" src="../js/scripts.js"></script>
 </body>

@@ -223,7 +223,7 @@ $mood = ORM::for_table('moods')->where('mood', 'Explore')->find_one()->as_array(
               <button type="submit" name="logout-btn" class="auth-button bordered-button">Log Out</button>
             </form>
           <?php else :?>
-            <form class="auth-nav" action="../pages/auth-form.php" method="post">
+            <form class="auth-nav" action="../pages/auth-form.html" method="post">
               <button type="submit" name="login-btn" class="auth-button">Login</button>
               <button type="submit" name="signup-btn" class="auth-button bordered-button">Sign Up</button>
             </form>
