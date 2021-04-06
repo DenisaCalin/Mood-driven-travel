@@ -11,7 +11,7 @@ const setupUI = (user) => {
 		loggedOutLinks.forEach(item => item.style.display = 'flex' );
 	}
 }
-
+ 
 /**  Sticky Header On Scroll */
 const h = document.querySelector( ".sticky-part" );
 let stuck = false;

@@ -145,15 +145,15 @@
           </div>
           <ul class="site-nav">
             <li class="dropdown-holder logged-in" >
-              <a href="../pages/travel-moods.php">Travel Moods<span class="angle"></span></a>
+              <a href="../pages/travel-moods.html">Travel Moods<span class="angle"></span></a>
               <ul class="dropdown" id="moods-dropdown">
               </ul>
             </li>
             <li class="logged-in">
-              <a href="../pages/travel-plan.php">Travel Plan</a>
+              <a href="../pages/travel-plan.html">Travel Plan</a>
             </li>
             <li class="logged-in">
-              <a href="../pages/wishlist.php">Wish List</a>
+              <a href="../pages/wishlist.html">Wish List</a>
             </li>
             <li class="logged-in">
               <a href="../pages/admin.html">ADMIN</a>
@@ -192,6 +192,8 @@
           <input type="text" name="motto" placeholder="Motto" required>
           <input type="text" name="icon" placeholder="Icon" required>
           <input type="text" name="image" placeholder="Image" required>
+          <progress value="0" max="100" id="uploader">0%</progress>
+          <input type="file" name="upload" id="fileButton" required>
           <textarea type="text" name="description" placeholder="Description" required></textarea>
           <button class="secondary-btn unfilled">ADD Mood</button>
         </form>
@@ -765,7 +767,7 @@
           </ul>
         </div>
         <div class="col">
-          <a class="heading-text logged-in" href="../pages/travel-moods.php">TRAVEL MOODS</a>
+          <a class="heading-text logged-in" href="../pages/travel-moods.html">TRAVEL MOODS</a>
           <ul id="moods-list">
           </ul>
         </div>
@@ -829,6 +831,7 @@
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
 
   <script>
     // Your web app's Firebase configuration
@@ -842,8 +845,12 @@
       appId: "1:354399978499:web:6d93b9b76e53b60e393a36",
       measurementId: "G-ZCHSFYLF15"
     };
+ 
     // Initialize Firebase
     firebase.initializeApp( firebaseConfig );
+
+    var storage = firebase.storage();
+
   </script>
 
   <script type="text/javascript" src="../js/firebase.js"></script>

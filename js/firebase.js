@@ -76,8 +76,8 @@ loginForm.addEventListener( 'submit', ( e ) => {
 		} )
 } )
 
-/** END Authentication */
 
+/** END Authentication */
 
 
 
@@ -98,7 +98,7 @@ let adminMoods = document.querySelector( '#admin .moods' );
 function renderMoodsHeader( doc ) {
 
 	let path = '../pages/travel-mood.html';
-	if ( window.location.pathname == "index.html" ) {
+	if ( window.location.pathname == "/lubdub/index.html" ) {
 		path = './pages/travel-mood.html';
 	}
 
@@ -120,7 +120,7 @@ function renderMoodsHeader( doc ) {
 
 function renderMoodsFooter( doc ) {
 	let path = '../pages/travel-mood.html';
-	if ( window.location.pathname == "index.html" ) {
+	if ( window.location.pathname == "/lubdub/index.html" ) {
 		path = './pages/travel-mood.html';
 	}
 	let li = document.createElement( 'li' );
@@ -320,6 +320,36 @@ function editMoodById( id, div, parent, callback ) {
 			callback();
 		} );
 }
+
+if (admin) {
+	let uploader = document.querySelector('#uploader');
+	let fileButton = document.querySelector('#fileButton');
+
+	fileButton.addEventListener('change', function(e){
+		// Get file
+		let file = e.target.files[0];
+		// Create storage ref
+		let storageRef = storage.ref('images/' + file.name);
+		// Upload file
+		let task = storageRef.put(file);
+		// Update progress bar
+		task.on('state_changed',
+			function progress(snapshot) {
+				let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				uploader.value = percentage;
+			},
+			function error(err) {
+
+			},
+			function complete() {
+
+			}
+			)
+	})
+
+}
+var uploader 
+
 /** END ADMIN */
 
 
@@ -366,34 +396,13 @@ function getMoods(changes, i) {
 		} );
 	}
 	else {
-		const main = document.querySelector('main');
-		main.innerHTML = `
-		<div class=" hero hero-1">
-		<div class="bg-shadow">
-		</div>
-		<div class="container">
-		  <h1>How do you want to feel in your next journey?</h1>
-		  <p class="pt-5 pb-5">Travel more concious about what you want to feel & experience</p>
-		  <div class="row">
-			<div class="col">
-			  <i class="fas fa-plug"></i>
-			  <p class="p-2">Connect</p>
-			</div>
-			<div class="col">
-			  <i class="far fa-heart"></i>
-			  <p class="p-2">Listen to your heart</p>
-			</div>
-			<div class="col">
-			  <i class="fas fa-plane"></i>
-			  <p class="p-2">Experience</p>
-			</div>
-		  </div>
-		  <div>
-		  <button class="primary-btn unfilled p-4" data-toggle="modal" data-target="#modal-login">LOGIN TO PICK YOUR TRAVEL MOOD</button>
-		</div>
-	  </div>`;
-	  const footer = document.querySelector('footer');
-	  footer.style.marginTop = '0';
+		var redirectLocation = "http://localhost/lubdub/index.html"; // Redirect destination
+
+		// Page location and redirectLocation should not be the same
+		if (window.location.href !== redirectLocation) {
+			// Redirect logic
+			window.location.replace(redirectLocation);
+		}
 	}
 } 
 /** END Getting Moods --  Real time listener */

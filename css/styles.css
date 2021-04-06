@@ -638,13 +638,14 @@ button:focus {
   background-color: transparent;
 }
 
-.primary-btn.goto {
+.primary-btn.goto, .primary-btn.goto a {
   font-size: 16px;
   font-weight: 600;
   transition: none;
+  color: #57BA98;
 }
 
-.primary-btn.goto:hover {
+.primary-btn.goto:hover, .primary-btn.goto a:hover {
   font-weight: 700;
 }
 
@@ -1623,9 +1624,10 @@ footer .copyright {
     display: none;
   }
 
-  .primary-btn.goto {
+  .primary-btn.goto, .primary-btn.goto a {
     font-size: 14px;
     font-weight: 400;
+    color: #57BA98 !important;
   }
 
   .primary-btn.goto span {
