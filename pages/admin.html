@@ -1,17 +1,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Admin</title>
-  <link rel="icon" type="image/png" href="../assets/images/road-trip.png">
-  <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Admin</title>
+	<link rel="icon" type="image/png" href="../assets/images/road-trip.png">
+	<link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
@@ -186,25 +185,76 @@
 
     <section>
       <div class="container" id="admin">
-        <div class="section-title p-3">Travel Moods</div>
-        <form id="add-mood-form">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="text" name="motto" placeholder="Motto" required>
-          <input type="text" name="icon" placeholder="Icon" required>
-          <input type="text" name="image" placeholder="Image" required>
-          <progress value="0" max="100" id="uploader">0%</progress>
-          <input type="file" name="upload" id="fileButton" required>
-          <textarea type="text" name="description" placeholder="Description" required></textarea>
-          <button class="secondary-btn unfilled">ADD Mood</button>
-        </form>
-        <button type="button" class="btn btn-info mb-3" data-toggle="collapse" data-target="#demo">View/Hide
-          Data</button>
+        <div class="moods-management">
+			<div class="section-title p-3">Travel Moods</div>
+			<form id="add-mood-form">
+				<input type="text" name="name" placeholder="Name" required>
+				<input type="text" name="motto" placeholder="Motto" required>
+				<div id="add-mood-form_icon">
+					<label id="add-mood-form_icon-upload">
+						<input type="file" name="uploadIcon" id="fileButtonIcon" hidden>
+						<span>Upload icon</span>
+					</label>
+					<progress value="0" max="100" id="uploaderIcon">0%</progress>
+				</div>
+				<input type="text" name="icon" id="add-mood-form_icon-title" placeholder="Uploaded icon" readonly>
+				<input type="text" name="iconURL" id="add-mood-form_icon-url" placeholder="Uploaded icon URL" readonly>
 
-        <div id="demo" class="collapse">
-          <div class="moods">
+				<div id="add-mood-form_bg">
+					<label id="add-mood-form_bg-upload">
+						<input type="file" name="upload" id="fileButton" hidden>
+						<span>Upload background image</span>
+					</label>
+					<progress value="0" max="100" id="uploader">0%</progress>
+				</div>
+				<input type="text" name="image" id="add-mood-form_bg-title" placeholder="Uploaded background" readonly>
+				<input type="text" name="imageURL" id="add-mood-form_bg-url" placeholder="Uploaded background URL" readonly>
 
-          </div>
+				<textarea type="text" name="description" placeholder="Description" required></textarea>
+				<button class="secondary-btn unfilled" onclick="addMood()">ADD Mood</button>
+			</form>
+			<button type="button" class="btn btn-info mb-3" data-toggle="collapse" data-target="#moods-data">View/Hide Data</button>
+	
+			<div id="moods-data" class="collapse">
+				<div class="moods">
+				</div>
+			</div>
         </div>
+		
+		<hr>
+
+		<div class="ideas-management">
+			<div class="section-title p-3">Travel Ideas</div>
+			<form id="add-idea-form">
+				<input type="text" name="ideaName" placeholder="Name" required>
+				<div id="add-idea-form_bg">
+					<label id="add-idea-form_bg-upload">
+						<input type="file" name="uploadIdea" id="fileButtonIdea" hidden>
+						<span>Upload background image</span>
+					</label>
+					<progress value="0" max="100" id="uploaderIdea">0%</progress>
+				</div>
+				<input type="text" name="ideaBgTitle" id="add-idea-form_bg-title" placeholder="Uploaded background" readonly>
+				<input type="text" name="ideaBgURL" id="add-idea-form_bg-url" placeholder="Uploaded background URL" readonly>
+				<select name="ideaMood" id="add-idea-form_select-mood" autocomplete=off required >
+					<option value="">Select mood</option>
+				</select>
+				<input type="text" name="ideaLocation" placeholder="Location" required>
+				<textarea type="text" name="ideaDescription" placeholder="Short Description" required></textarea>
+				<textarea type="text" name="ideaBestExperiences" placeholder="Best experiences" required></textarea>
+				<textarea type="text" name="ideaGetThere" placeholder="How to get there" required></textarea>
+				<button class="secondary-btn unfilled" onclick="addIdea()">ADD Idea</button>
+			</form>
+			<button type="button" class="btn btn-info mb-3" data-toggle="collapse" data-target="#ideas-data">View/Hide Data</button>
+			
+			<div id="ideas-data" class="collapse">
+				<div class="ideas">
+					<ul class="idea-list">
+					</ul>
+				</div>
+			</div>
+
+		</div>
       </div>
     </section>
   </main>
@@ -812,15 +862,10 @@
     </div>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>

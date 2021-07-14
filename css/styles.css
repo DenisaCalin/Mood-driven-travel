@@ -1323,13 +1323,61 @@ footer .copyright {
   text-align: right;
 }
 
-#add-mood-form input, #add-mood-form textarea,
-.edit-mood-form input, .edit-mood-form textarea {
+#add-mood-form input, 
+#add-mood-form textarea,
+#add-idea-form input, 
+#add-idea-form textarea,
+.edit-mood-form input, 
+.edit-mood-form textarea {
   display: block;
   width: 100%;
   margin-bottom: 15px;
   padding: 5px;
 }
+
+#add-idea-form_select-mood {
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+#add-mood-form_icon,
+#add-mood-form_bg,
+#add-idea-form_bg
+ {
+  display: flex;
+  align-items: center;
+}
+
+#add-mood-form_icon-upload,
+#add-mood-form_bg-upload,
+#add-idea-form_bg-upload
+ {
+  cursor: pointer;
+  border: 1px solid rgb(133, 133, 133);
+  padding: 5px 10px;
+  border-radius: 2px;
+  margin-right: 30px;
+  background: #f0f0f0;
+}
+
+#add-mood-form_icon-upload:hover,
+#add-mood-form_bg-upload:hover,
+#add-idea-form_bg-upload:hover
+{
+  border: 1px solid #000;
+  color: #000;
+}
+
+#add-mood-form_icon-title,
+#add-mood-form_icon-url,
+#add-mood-form_bg-title,
+#add-mood-form_bg-url,
+#add-idea-form_bg-title,
+#add-idea-form_bg-url
+{
+  cursor: not-allowed;
+}
+
 
 @media (min-width: 768px) {
 

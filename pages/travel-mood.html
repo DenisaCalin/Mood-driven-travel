@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Plan Your Trip | MoodDriven</title>
+  <title>Travel Mood | MoodDriven</title>
 
   <link rel="icon" type="image/png" href="../assets/images/road-trip.png">
   <link rel="icon" type="image/png" href="../assets/images/active-mood.jpg">
@@ -177,67 +177,7 @@
     </div>
   </header>
 
-  <main>
-    <div class="hero-half" style="background-image:url('../assets/images/active-mood.jpg')">
-      <div class="bg-shadow">
-      </div>
-      <div class="container">
-        <h1>Active Mood</h1>
-      </div>
-    </div>
-
-    <div class="container">
-      <ul class="idea-list">
-        <li class="item mt-3 mb-3">
-          <div class="item-img">
-            <img src="../assets/images/explore-mood.jpg" alt="smth">
-          </div>
-          <div class="item-info">
-            <div class="ml-3 mb-3 mt-1">
-              <img src="../assets/images/active.svg" alt="nnn">
-              <span class="small ml-2">Active</span>
-            </div>
-            <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-            <button class="primary-btn goto" type="button" name="button"><a href="../pages/travel-idea.php">Go to</a><span>.</span><span>.</span><span>.</span></button>
-            <button class="primary-btn add-to-wishlist added" type="button" name="button"><i uk-icon="heart"
-                class="pr-2 pb-1"></i><span class="">Add to Wishlist</span> </button>
-          </div>
-        </li>
-        <li class="item mt-3 mb-3">
-          <div class="item-img">
-            <img src="../assets/images/explore-mood.jpg" alt="smth">
-          </div>
-          <div class="item-info">
-            <div class="ml-3 mb-3 mt-1">
-              <img src="../assets/images/active.svg" alt="nnn">
-              <span class="small ml-2">Active</span>
-            </div>
-            <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-            <button class="primary-btn goto" type="button" name="button">Go
-              to<span>.</span><span>.</span><span>.</span></button>
-            <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart"
-                class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
-          </div>
-        </li>
-        <li class="item mt-3 mb-3">
-          <div class="item-img">
-            <img src="../assets/images/explore-mood.jpg" alt="smth">
-          </div>
-          <div class="item-info">
-            <div class="ml-3 mb-3 mt-1">
-              <img src="../assets/images/active.svg" alt="nnn">
-              <span class="small ml-2">Active</span>
-            </div>
-            <div class="item-title ml-3 m-2"><strong>Amsterdam Photo Safari</strong></div>
-            <button class="primary-btn goto" type="button" name="button">Go
-              to<span>.</span><span>.</span><span>.</span></button>
-            <button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart"
-                class="pr-2 pb-1"></i><span>Add to Wishlist</span> </button>
-          </div>
-        </li>
-      </ul>
-    </div>
-
+  <main id="mood-page">
 
   </main>
 
@@ -844,15 +784,10 @@
     </div>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
@@ -863,6 +798,7 @@
   <!-- Add Firebase products that you want to use -->
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>
 
   <script>
     // Your web app's Firebase configuration
@@ -876,8 +812,12 @@
       appId: "1:354399978499:web:6d93b9b76e53b60e393a36",
       measurementId: "G-ZCHSFYLF15"
     };
+ 
     // Initialize Firebase
     firebase.initializeApp( firebaseConfig );
+
+    var storage = firebase.storage();
+
   </script>
 
   <script type="text/javascript" src="../js/firebase.js"></script>
