@@ -1,63 +1,116 @@
 /** Authentication */
 
+const admins = ['VSU3YIwScdV4LiQo86gK22jyLdk2'];
 // listen for auth status changes
 firebase
 	.auth()
 	.onAuthStateChanged( user => {
 		if ( user ) {
-			console.log( 'user logged in' );
+			console.log("USER DATA:")
+			console.log(user.uid);
+			console.log(user.displayName);
+			console.log(user.email);
+			console.log(user.photoURL);
 
+			$( '#account-btn img' ).attr("src", "https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d");
+
+			if(user.photoURL) {
+				$( '#account-btn img' ).attr("src", user.photoURL + `?v=${new Date().getTime()}`);
+			}
+			else {
+				setTimeout(function(){
+					$( '#account-btn img' ).attr("src", user.photoURL + `?v=${new Date().getTime()}`);
+				}, 3000);
+			}
+
+
+			if ( admins.includes(user.uid) ) {
+				if (!document.querySelector("#li-admin-access")) {
+					const liAdmin = document.createElement( 'li' );
+					liAdmin.className = 'logged-in';
+					liAdmin.id = "li-admin-access";
+					let redirectLocation = "http://localhost/lubdub/index.html"; // Redirect destination
+					// Page location and redirectLocation should not be the same
+					if (window.location.href !== redirectLocation) {
+						liAdmin.innerHTML = `<a href="../pages/admin.html">ADMIN</a>`;
+					} else {
+						liAdmin.innerHTML = `<a href="./pages/admin.html">ADMIN</a>`;
+					}
+					document.querySelector('.site-nav').appendChild(liAdmin);
+					liAdmin.style.display = 'block';
+				}
+			}
 			let i = 0;
 			let moods = [];
+
 			firebase
-				.firestore()
-				.collection( 'moods' )
-				.onSnapshot( snapshot => {
-					let changes = snapshot.docChanges();
-					for (const change of changes) {							
-						// let icon = waitForIcons(change.doc);
-						// let background = waitForBackgrounds(change.doc);
-						// Promise.all([icon, background]).then((values) => {
-							i++;									
-							let mood = {
-								"moodID" : change.doc.id,
-								"moodData" : change.doc.data()
-							}
-							moods.push(mood);
-							getMoods( change, i );
-						// })
+			.firestore()
+			.collection( 'moods' )
+			.onSnapshot( snapshot => {
+				let changes = snapshot.docChanges();
+				for (const change of changes) {							
+					i++;									
+					let mood = {
+						"moodID" : change.doc.id,
+						"moodData" : change.doc.data()
 					}
-				});
+					moods.push(mood);
+					getMoods( change, i, user );
+				}
+			});
 
 
 			let count = 0;
 			firebase
-				.firestore()
-				.collection( 'ideas' )
-				.orderBy("counter", "desc")
-				.onSnapshot( snapshot => {
-					let changes = snapshot.docChanges();
-					for (const change of changes) {	
-						count ++;
-						getIdeas(moods, change, count, user);
-					}
-				});
+			.firestore()
+			.collection( 'ideas' )
+			.orderBy("counter", "desc")
+			.onSnapshot( snapshot => {
+				let changes = snapshot.docChanges();
+				for (const change of changes) {	
+					count ++;
+					getIdeas(moods, change, count, user);
+				}
+			});
 
 			firebase
-				.firestore()
-				.collection( 'reviews' )
-				.orderBy("dateAndTime", "desc")
-				.onSnapshot( snapshot => {
-					let changes = snapshot.docChanges();
-					for (const change of changes) {	
-						getComments(change);
+			.firestore()
+			.collection( 'reviews' )
+			.orderBy("dateAndTime", "desc")
+			.onSnapshot( snapshot => {
+				let changes = snapshot.docChanges();
+				for (const change of changes) {	
+					getComments(change);
+				}
+			});
+			
+			firebase
+			.firestore()
+			.collection( 'wishlist' )
+			.where('userUID', '==', user.uid)
+			.onSnapshot( snapshot => {
+				let changes = snapshot.docChanges();
+				$( "#no-ideas" ).hide();
+
+				for (const change of changes) {	
+					if( change.type == "added") {
+						renderWishlist(change.doc.data(), change.doc.id);
 					}
-				});
+					else if( change.type == "removed")  {
+						let wishlistItem = document.querySelector( '[data-id="' + change.doc.id + '"]' );
+						document.querySelector( "ul.wish-list" ).removeChild( wishlistItem );
+					}
+				}
+				if(snapshot.empty) {
+					$( "#no-ideas" ).show();
+				}
+			});
 
 			setupUI( user );
 
 		} else {
 			console.log( 'user logged out' );
+			$('section.most-read').hide();
 
 			var redirectLocation = "http://localhost/lubdub/index.html"; // Redirect destination
 			// Page location and redirectLocation should not be the same
@@ -72,37 +125,100 @@ firebase
 	} );
 
 // sign up
-const signupForm = document.querySelector( '#signup-form' );
-signupForm.addEventListener( 'submit', ( e ) => {
-	e.preventDefault();
-
+const signupButton = document.querySelector( '#signup-btn' );
+if ( signupButton ) {
+	const signupForm = document.querySelector( '#signup-form' );
+	// default avatar
+	$('#uploaderAvatar').hide();
+	let uploaderAvatarSignup = document.querySelector('#uploaderAvatar');
+	let fileButtonAvatarSignup = document.querySelector('#fileButtonAvatar');
+	// upload avatar image
+	fileButtonAvatarSignup.addEventListener('change', function(e) {
+		$('#uploaderAvatar').show();
+		document.querySelector( '#signup-avatar_upload span' ).innerHTML = 'Uploading...';
+		// Get file
+		let file = e.target.files[0];
+		// Create storage ref
+		let email = signupForm.email.value;
+		if(!email) {
+			email = Math.random().toString(36).substring(7);
+		}
+		let storageRef = storage.ref('avatars/' + email + '.jpg');
+		// Save name for storing in moods collection
+		signupForm.avatar.value = file.name;
+		// Upload file
+		let task = storageRef.put(file);
+		// Update progress bar
+		task.on('state_changed',
+			function progress(snapshot) {
+				let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				uploaderAvatarSignup.value = percentage;
+				if (percentage < 100) {
+					document.querySelector( '#signup-avatar_upload span' ).innerHTML = 'Uploading...';
+				} else {
+					document.querySelector( '#signup-avatar_upload span' ).innerHTML = 'Uploaded';
+				}
+			},
+			function error(err) {
+	
+			},
+			function complete() {
+				storageRef
+					.getDownloadURL()
+					.then(avatar => {
+						signupForm.avatarURL.value = avatar;
+					});
+			}
+		)
+	})
 	// get user info
-	const displayName = signupForm[ 'signup-username' ].value;
-	const email = signupForm[ 'signup-email' ].value;
-	const password = signupForm[ 'signup-password' ].value;
+	$('#signup-password, #signup-password-confirm').on('keyup', function () {
+		if ($('#signup-password').val() == $('#signup-password-confirm').val()) {
+			$('#signup-error-message').html('<i class="fas fa-check"></i> Passwords are matching').css('color', 'green');
+			signupForm.addEventListener( 'submit', ( e ) => {
+				e.preventDefault();
+				const userName = signupForm[ 'signup-username' ].value;
+				const avatar = signupForm[ 'signup-avatar_url' ].value;
+				const email = signupForm[ 'signup-email' ].value;
+				const password = signupForm[ 'signup-password' ].value;
+				if( signupForm.avatar.value == '' || signupForm.avatarURL.value == '') {
+					signupForm.avatar.value = "Default";
+					signupForm.avatarURL.value = "https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d";
+				}
+				// sign up the user
+				firebase
+					.auth()
+					.createUserWithEmailAndPassword( email, password )
+					.then( cred => {
+						$( '#modal-signup' ).modal( 'hide' );
+						const currentUser = firebase.auth().currentUser;
+						currentUser.updateProfile({
+							displayName: userName,
+							photoURL: signupForm.avatarURL.value
+							}).then(() => {
+								console.log(profile);
+								signupForm.reset();
+								location.reload();
+							}).catch((error) => {
+								$('#signup-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+							});  
+					})
+					.catch( error => {
+						$('#signup-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+					});
+				});
+		} else {
+			$('#signup-error-message').html('<i class="fas fa-exclamation"></i> Passwords are not matching').css('color', 'red');
+		}
+	});
 
-	// sign up the user
-	firebase
-		.auth()
-		.createUserWithEmailAndPassword( email, password )
-		.then( cred => {
-			$( '#modal-signup' ).modal( 'hide' );
-			signupForm.reset();
-			// location.reload();
-			console.log(cred);
-			let uid = cred.uid;
-			// TODO: add details to users table in firestore.
-		} );
-
-		// TODO: add errors
-		// TODO: I {code: "auth/weak-password", message: "Password should be at least 6 characters", a: null}
-		// TODO: I {code: "auth/email-already-in-use", message: "The email address is already in use by another account.", a: null}
-} );
+}
 
 // log out
 const logoutBtn = document.querySelector( '#logout-btn' );
 logoutBtn.addEventListener( 'click', ( e ) => {
 	e.preventDefault();
+	location.reload();
 
 	firebase
 		.auth()
@@ -126,12 +242,200 @@ loginForm.addEventListener( 'submit', ( e ) => {
 			loginForm.reset();
 			location.reload();
 		} )
+		.catch( error => {
+			$('#login-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+		});
 } )
 
-// TODO: admin role
-// TODO: ADD modal for user - edit details
-// TODO: edit comment section after that
+// edit account info
+const accountButton = document.querySelector( '#account-btn' );
+if ( accountButton ) {
+
+	const accountForm = document.querySelector( '#account-form' );
+
+	//get account info 
+	accountButton.addEventListener('click', function(e) {
+		accountForm.reset();
+		const currentUser = firebase.auth().currentUser;
+		const defaultAvatarURL ="https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d";
+		if( currentUser.photoURL == defaultAvatarURL) {
+			accountForm.avatar.value = "Default";
+		}
+		accountForm.avatarURL.value = currentUser.photoURL;
+		accountForm.accountUsername.value = currentUser.displayName;
+		accountForm.accountEmail.value = currentUser.email;
+		document.querySelector( '#account-avatar_upload span' ).innerHTML = 'Change avatar';
+		document.querySelector('#uploaderAvatarEdit').value = 0;
+		$('#uploaderAvatarEdit').hide();
+		$('.show-message').empty();
+		$('#account-error-message').empty();
+	});
+	
+	// avatar
+	let uploaderAvatarEdit = document.querySelector('#uploaderAvatarEdit');
+	let fileButtonAvatarEdit = document.querySelector('#fileButtonAvatarEdit');
+	// upload avatar image
+	fileButtonAvatarEdit.addEventListener('change', function(e) {
+		$('#uploaderAvatarEdit').show();
+		document.querySelector( '#account-avatar_upload span' ).innerHTML = 'Uploading...';
+		// Get file
+		let file = e.target.files[0];
+		// Create storage ref
+		const currentUser = firebase.auth().currentUser;
+		let storageRef = storage.ref('avatars/' + currentUser.email + '.jpg');
+		// Save name for storing in avatars collection
+		accountForm.avatar.value = file.name;
+		// Upload file
+		let task = storageRef.put(file);
+		// Update progress bar
+		task.on('state_changed',
+			function progress(snapshot) {
+				let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				uploaderAvatarEdit.value = percentage;
+				if (percentage < 100) {
+					document.querySelector( '#account-avatar_upload span' ).innerHTML = 'Uploading...';
+				} else {
+					document.querySelector( '#account-avatar_upload span' ).innerHTML = 'Uploaded';
+				}
+			},
+			function error(err) {
+	
+			},
+			function complete() {
+				storageRef
+					.getDownloadURL()
+					.then(avatar => {
+						accountForm.avatarURL.value = avatar;
+					});
+			}
+		)
+	})
+
+	// UPDATE user info
+	accountForm.addEventListener( 'submit', ( e ) => {
+		e.preventDefault();
+
+		const defaultAvatarURL ="https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d";
+		if( accountForm.avatarURL.value == '') {
+			accountForm.avatarURL.value = defaultAvatarURL;
+		}
+		// update the user data
+		const newAvatar = accountForm.avatarURL.value;
+		const newUserName = accountForm.accountUsername.value;
+		const newEmail = accountForm.accountEmail.value;
+		const oldPassword = accountForm.accountOldPassword.value;
+		const newPassword = accountForm.accountPassword.value;
+
+		const currentUser = firebase.auth().currentUser;
+
+		if(currentUser.photoURL != newAvatar) {
+			currentUser.updateProfile({
+				photoURL: accountForm.avatarURL.value,
+			}).then(() => {
+				$('#account-avatar-message').html('<i class="fas fa-check"></i>').css('color', 'green');
+				$("#account-avatar-message ").attr('title', 'Avatar updated!');
+				$('#account-avatar-message').tooltip({placement: 'top'}).tooltip('show');
+				setTimeout(function() {
+					$("#account-avatar-message").hide('blind', {}, 700)
+					$('#account-avatar-message').tooltip('hide');
+				}, 3000);
+				$( '#account-btn img' ).attr("src", currentUser.photoURL);
+				console.log("Avatar updated!");
+			});
+		}
+
+		if(currentUser.displayName != newUserName ) {
+			currentUser.updateProfile({
+				displayName: accountForm.accountUsername.value,
+			}).then(() => {
+				$('#account-username-message').html('<i class="fas fa-check"></i>').css('color', 'green');
+				$("#account-username-message").attr('title', 'Username updated!');
+				$('#account-username-message').tooltip({placement: 'top'}).tooltip('show');
+				setTimeout(function() {
+					$("#account-username-message").hide('blind', {}, 700)
+					$('#account-username-message').tooltip('hide');
+				}, 3000);
+				console.log("Username updated!");
+			});
+		}
+
+		if( currentUser.email != newEmail ) {
+			if(oldPassword == "") {
+				$('#account-error-message').html('<i class="fas fa-exclamation"></i> Current password is required').css('color', 'red');
+				console.log("here");
+			} else {
+				$('#account-error-message').empty();
+	
+				firebase.auth()
+				.signInWithEmailAndPassword(currentUser.email, oldPassword)
+				.then(function(userCredential) {
+					userCredential.user.updateEmail(newEmail).then( function () {
+						$('#account-email-message').html('<i class="fas fa-check"></i>').css('color', 'green');
+						$("#account-email-message ").attr('title', 'Email updated!');
+						$('#account-email-message').tooltip({placement: 'top',trigger: 'manual'}).tooltip('show');
+						setTimeout(function() {
+							$("#account-email-message").hide('blind', {}, 700)
+							$('#account-email-message').tooltip('hide');
+						}, 3000);
+						console.log("Email updated!");
+					}).then
+				}).catch((error) => { 
+					$('#account-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+				});
+			}
+		}
+
+		if( newPassword != '' ) {
+			if( oldPassword == '' ) {
+				$('#account-error-message').html('<i class="fas fa-exclamation"></i> Current password is required.').css('color', 'red');
+			} else {
+				if( newPassword == oldPassword ) {
+					$('#account-error-message').html('<i class="fas fa-exclamation"></i> Current password is the same as new password.').css('color', 'red');
+				}
+				else {
+					if ($('#account-password').val() != $('#account-password-confirm').val()) {
+						$('#account-error-message').html('<i class="fas fa-exclamation"></i> Passwords are not matching.').css('color', 'red');
+					}
+					else {
+						$('#account-error-message').empty();
+		
+						firebase
+						.auth()
+						.signInWithEmailAndPassword(currentUser.email, oldPassword)
+						.then(function(userCredential) {
+							currentUser.updatePassword(accountForm.accountPassword.value).then(() => {
+								$('#account-new-password-message').html('<i class="fas fa-check"></i>').css('color', 'green');
+								$("#account-new-password-message ").attr('title', 'Password updated!');
+								$('#account-new-password-message').tooltip({placement: 'top',trigger: 'manual'}).tooltip('show');
+								setTimeout(function() {
+									$("#account-new-password-message").hide('blind', {}, 700)
+									$('#account-new-password-message').tooltip('hide');
+								}, 3000);
+								console.log("Password updated!");
+							}).catch((error) => {
+								$('#account-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+							});
+						}).catch((error) => { 
+							$('#account-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
+						});
+					}
+				}
+			}
+		}
+	});
+
+	$('#account-password, #account-password-confirm').on('keyup', function () {
+		if ($('#account-password').val() == $('#account-password-confirm').val()) {
+			$('#account-error-message').html('<i class="fas fa-check"></i> Passwords are matching').css('color', 'green');
+		} else {
+			$('#account-error-message').html('<i class="fas fa-exclamation"></i> Passwords are not matching').css('color', 'red');
+		}
+	});
+
+}
+// TODO: admin role backend
 // TODO: wishlist
+// TODO: extra: in mood page, add search by location
 
 
 /** END Authentication */
@@ -147,7 +451,7 @@ let moodsHeader = document.querySelector( '#moods-dropdown' );
 let moodsFooter = document.querySelector( '#moods-list' );
 
 let moodsListContainer = document.querySelector( '#moods-list-container' );
-let admin = document.querySelector( '#admin' );
+let adminPage = document.querySelector( '#admin' );
 let adminMoods = document.querySelector( '#admin .moods' );
 let adminIdeas = document.querySelector( '#admin .ideas' );
 let selectedMood = document.querySelector( "#mood-page" );
@@ -274,7 +578,9 @@ function renderIdeasList( moodRef ) {
 					li.className = 'item mt-3 mb-3';
 					li.innerHTML = `
 						<div class="item-img">
-							<img src="${ideaRef.data().backgroundURL}" alt="${ideaRef.data().background}">
+							<span>
+								<img src="${ideaRef.data().backgroundURL}" alt="${ideaRef.data().background}">
+							</span>
 						</div>
 						<div class="item-info">
 							<div class="ml-3 mb-3 mt-1">
@@ -285,10 +591,6 @@ function renderIdeasList( moodRef ) {
 							<button class="primary-btn goto" type="button" name="button">
 								<a href="../pages/travel-idea.html?idea=${ideaRef.id}">Go to</a>
 								<span>.</span><span>.</span><span>.</span>
-							</button>
-							<button class="primary-btn add-to-wishlist" type="button" name="button">
-								<i uk-icon="heart" class="pr-2 pb-1"></i>
-								<span class="">Add to Wishlist</span>
 							</button>
 						</div>
 						`;
@@ -314,7 +616,6 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 		</section>
 	`;
 
-	
 	let ideaData = document.querySelector( ".idea .container" );
 	ideaData.innerHTML = `
 		<div class="idea-header">
@@ -329,7 +630,7 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 				</div>
 			</li>
 			</ul>
-			<button class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span></button>
+			<button id="add-to-wishlist-btn" class="primary-btn add-to-wishlist" type="button" name="button"><i uk-icon="heart" class="pr-2 pb-1"></i><span>Add to Wishlist</span></button>
 
 		</div>
 		<div class="idea-body">
@@ -360,7 +661,6 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 		</div>
 		`;
 	
-	
 	// update no of idea views
 	firebase
 	.firestore()
@@ -370,9 +670,126 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 		counter: ideaRef.data().counter + 1
 	});
 
+	// set hidden comment fields
+
 	document.querySelector("#commentIdeaID").value = ideaRef.id;
-	document.querySelector("#commentUserName").value = user.email;
-			
+	document.querySelector("#commentUserName").value = user.displayName;
+
+	// ADD 	To Wish List
+	const addToWishListBtn = $("#add-to-wishlist-btn");
+	if( addToWishListBtn ) {
+
+		let userUID = String(user.uid);
+		let ideaID = String(ideaRef.id);
+
+		console.log(userUID, " => ", ideaID);
+
+		firebase
+		.firestore()
+		.collection( 'wishlist' )
+		.where('userUID', '==', userUID)
+		.where('ideaID', '==', ideaID)
+		.get()
+		.then((querySnapshot) => {
+			if(!querySnapshot.empty){
+				querySnapshot.forEach((doc) => {
+					console.log(doc.data());
+						addToWishListBtn.addClass("added");
+						$("#add-to-wishlist-btn span").html('Added to Wishlist');
+						addToWishListBtn.prop('disabled', true);
+						console.log("already added");
+						// doc.data() is never undefined for query doc snapshots
+				})
+			}
+			else {
+				console.log("not added");
+				if ( !addToWishListBtn.hasClass("added") ) {
+
+					addToWishListBtn.one( "click", function() {
+						const currentUser = firebase.auth().currentUser;
+		
+						if(currentUser) {
+							addToWishListBtn.addClass("added");
+							$("#add-to-wishlist-btn span").html('Added to Wishlist');
+							addToWishlist(currentUser.uid, ideaRef);
+						}
+					})
+				}
+			}
+		}).catch((error) => {
+					console.log("Error getting documents: ", error);
+			});
+		
+	}	
+}
+
+function addToWishlist (userID, ideaRef) {
+	firebase
+	.firestore()
+	.collection( 'wishlist' )
+	.add( {
+		userUID: userID,
+		ideaID: ideaRef.id
+	} )
+	.then ( function () {
+		console.log("added to wishlist");
+	})
+}
+
+function renderWishlist (wishlistRef, wishlistItemID) {
+	firebase.firestore().collection( 'ideas' ).doc(wishlistRef.ideaID).get().then((ideaRef) => {
+		if (ideaRef.exists) {
+			let docMoodRef = firebase.firestore().collection( 'moods' ).doc(ideaRef.data().mood);
+			docMoodRef.get().then((moodRef) => {
+				if (moodRef.exists) {
+					// console.log("Document data:", ideaRef.data());
+					let wishList = document.querySelector( "ul.wish-list" );
+					if( wishList ) {
+						let li = document.createElement( 'li' );
+						li.className = 'item mt-3 mb-3';
+						li.setAttribute( 'data-id', wishlistItemID );
+						li.innerHTML = `
+							<div class="item-img">
+								<span>
+									<img src="${ideaRef.data().backgroundURL}" alt="${ideaRef.data().background}">
+								</span>
+							</div>
+							<div class="item-info">
+								<div class="ml-3 mb-3 mt-1">
+									<img src="${moodRef.data().iconURL}" alt="${moodRef.data().icon}">
+									<span class="small ml-2">${moodRef.data().name}</span>
+								</div>
+								<div class="item-title ml-3 m-2"><strong>${ideaRef.data().name}</strong></div>
+								<button class="primary-btn goto" type="button" name="button">
+									<a href="../pages/travel-idea.html?idea=${ideaRef.id}">Go to</a>
+									<span>.</span><span>.</span><span>.</span>
+								</button>
+								<input type="text" val="${wishlistItemID}" hidden>
+								<button data-id="${wishlistItemID}" class="primary-btn delete delete-wishlist-item" onclick="deleteFromWishlist('${wishlistItemID}')" type="button" name="button"><i class="far fa-trash-alt"></i><span>Delete</span> </button>
+							</div>
+						`;
+						wishList.appendChild( li );
+					}
+				}
+			});
+		} else {
+			// doc.data() will be undefined in this case
+			console.log("No such document!");
+		}
+	}).catch((error) => {
+		console.log("Error getting document:", error);
+	});
+}
+
+function deleteFromWishlist(wishlistItemID) {
+	console.log("to be deleted")
+	firebase
+	.firestore()
+	.collection( 'wishlist' )
+	.doc( wishlistItemID )
+	.delete().then( () => {
+		console.log("removed");
+	});
 }
 
 function renderMostReadIdeas(moodRef, ideaRef, count) {
@@ -439,33 +856,49 @@ function renderMostReadIdeas(moodRef, ideaRef, count) {
 }
 
 // ADD comment
+function toTimestamp( strDate ) {
+	var datum = Date.parse(strDate);
+	return datum/1000;
+}
+
 const commentsForm = document.querySelector( '#add-comment-form' );
 
-function addComment() {
-	commentsForm.addEventListener( 'submit', ( e ) => {
+if(commentsForm) {
+	
+	document.querySelector("#add-comment-btn").addEventListener( 'click', ( e ) => { 
 		e.preventDefault();
 		e.stopPropagation();
-
-		commentsForm.commentDateTime.value = new Date().toLocaleString();
 		
-		firebase
-			.firestore()
-			.collection( 'reviews' )
-			.add( {
-				comment:commentsForm.commentContent.value,
-				dateAndTime:commentsForm.commentDateTime.value,
-				ideaID: commentsForm.commentIdeaID.value,
-				userName: commentsForm.commentUserName.value
-			} );
+		const currentUser = firebase.auth().currentUser;
 
-		commentsForm.commentContent.value = '';
-		commentsForm.commentDateTime.value = '';
-	});
+		if(currentUser) {
+
+			const today = new Date().toLocaleString();
+			const timestamp = toTimestamp(today);
+
+			firebase
+				.firestore()
+				.collection( 'reviews' )
+				.add( {
+					comment:commentsForm.commentContent.value,
+					dateAndTime: timestamp,
+					ideaID: commentsForm.commentIdeaID.value,
+					userName: currentUser.displayName,
+					userAvatar: currentUser.photoURL
+				} ). then ( function () {
+	
+					commentsForm.commentContent.value = '';
+					commentsForm.commentDateTime.value = '';
+				})
+		}
+	
+		})
 }
 
 function renderComments(commentRef) {
-	const stringDate = commentRef.data().dateAndTime;
-	const dateAndTime = new Date(stringDate);
+	console.log(toTimestamp(new Date().toLocaleString()));
+	const timestamp = commentRef.data().dateAndTime;
+	const dateAndTime = new Date(timestamp * 1000);
 	const year = dateAndTime.getFullYear(); // year
 	const date = dateAndTime.getDate(); // day
 	const months = [
@@ -503,13 +936,21 @@ function renderComments(commentRef) {
 		formatted = `Today, ${hour}:${minutes}`
 	}
 
+	let userAvatar = "https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d";
 
+	if (commentRef.data().userAvatar) {
+		userAvatar = commentRef.data().userAvatar;
+		console.log("comment");
+		console.log(userAvatar);
+	}
+	
 	let ideasList = document.querySelector( ".comment-list" );
 	let li = document.createElement( 'li' );
 	li.className = 'comment';
 	li.innerHTML = `
-		<div class="user-icon p-2">
-			<img src="../assets/images/user.png" alt="">
+		<div class="user-icon"><span>
+			<img src="${userAvatar}">
+			</span>
 		</div>
 		<div class="comment-body">
 			<span class="comment-time text-muted small">${formatted}</span>
@@ -520,174 +961,140 @@ function renderComments(commentRef) {
 	ideasList.appendChild( li );
 }
 
+
+
+
 /** ADMIN */
 
-// async function getIcons(doc) {
-// 	let imgUrl;
-// 	return storage
-// 		.ref('icons/' + doc.data().icon)
-// 		.getDownloadURL()
-// 		.then(imgAux => {
-// 				imgUrl = imgAux;
-// 				return imgUrl;
-// 			});
-// }
-// async function waitForIcons (doc) {
-// 	let imgUrl;
-// 	await Promise.all([getIcons(doc)]).then((value) => {
-// 		imgUrl = value[0];
-// 	});
-// 	return imgUrl;
-// }
+if (adminPage) {
 
-// async function getBackgrounds(doc) {
-// 	let imgUrl;
-// 	return storage
-// 		.ref('backgrounds/' + doc.data().image)
-// 		.getDownloadURL()
-// 		.then(imgAux => {
-// 				imgUrl = imgAux;
-// 				return imgUrl;
-// 			});
-// }
-// async function waitForBackgrounds (doc) {
-// 	let imgUrl;
-// 	await Promise.all([getBackgrounds(doc)]).then((value) => {
-// 		imgUrl = value[0];
-// 	});
-// 	return imgUrl;
-// }
-
-function renderMoodsAdmin( moodRef, i ) {	
-	let div = document.createElement( 'div' );
-	div.setAttribute( 'data-id', moodRef.id );
-
-	if ( i % 2 == 0 ) {
-		div.className = 'row';
-		div.innerHTML = `
-			<div class="col col-lg-9 col-md-8 pl-0">
-				<div class="bg-container" style="background-image: url('${moodRef.data().imageURL}');">
+	function renderMoodsAdmin( moodRef, i ) {	
+		let div = document.createElement( 'div' );
+		div.setAttribute( 'data-id', moodRef.id );
+	
+		if ( i % 2 == 0 ) {
+			div.className = 'row';
+			div.innerHTML = `
+				<div class="col col-lg-9 col-md-8 pl-0">
+					<div class="bg-container" style="background-image: url('${moodRef.data().imageURL}');">
+					</div>
 				</div>
-			</div>
-			<div class="col col-lg-3 col-md-4">
-				<div class="description">
-				<img src="${moodRef.data().iconURL}" alt="${moodRef.data().icon}">
-				<h5 class="m-3">${moodRef.data().name}</h5>
-				<div class="motto">${moodRef.data().motto}</div>
-				<p>
+				<div class="col col-lg-3 col-md-4">
+					<div class="description">
+					<img src="${moodRef.data().iconURL}" alt="${moodRef.data().icon}">
+					<h5 class="m-3">${moodRef.data().name}</h5>
+					<div class="motto">${moodRef.data().motto}</div>
+					<p>
+						${moodRef.data().description}
+					</p>
+					<button onclick="redirectToMood('${moodRef.id}');" class="secondary-btn unfilled">Choose this mood</button>
+					</div>
+				</div>
+				`;
+		} else {
+			div.className = 'row row-invert';
+			div.innerHTML = `
+				<div class="col col-lg-3 col-md-4">
+					<div class="description">
+					<img src="${moodRef.data().iconURL}" alt="${moodRef.data().icon}">
+					<h5 class="m-3">${moodRef.data().name}</h5>
+					<div class="motto">${moodRef.data().motto}</div>
+					<p>
 					${moodRef.data().description}
-				</p>
-				<button onclick="redirectToMood('${moodRef.id}');" class="secondary-btn unfilled">Choose this mood</button>
+					</p>
+					<button onclick="redirectToMood('${moodRef.id}');" class="secondary-btn unfilled">Choose this mood</button>
+					</div>
 				</div>
+				<div class="col col-lg-9 col-md-8 pr-0">
+					<div class="bg-container" style="background-image: url('${moodRef.data().imageURL}');">
+					</div>
+				</div>
+				`;
+		}
+	
+		let edit = document.createElement( 'span' );
+		edit.classList.add( 'edit' );
+		edit.textContent = 'Edit';
+		div.appendChild( edit );
+	
+		let cross = document.createElement( 'i' );
+		cross.classList.add( 'fa', 'fa-times', 'cross' );
+		cross.setAttribute( 'aria-hidden', 'true' );
+		cross.setAttribute( 'data-toggle', 'tooltip' );
+		cross.setAttribute( 'data-placement', 'top' );
+		cross.setAttribute( 'title', 'Delete' );
+		div.appendChild( cross );
+	
+		let deleteShadow = document.createElement( 'div' );
+		deleteShadow.classList.add( 'delete-shadow' );
+		div.appendChild( deleteShadow );
+	
+		adminMoods.appendChild( div );
+	
+		//deleting data
+		cross.addEventListener( 'click', ( e ) => {
+			e.stopPropagation();
+			let id = e.target.parentElement.getAttribute( 'data-id' );
+			firebase
+			.firestore()
+			.collection( 'moods' )
+			.doc( id )
+			.delete();
+		} )
+	
+		// updating data
+		edit.addEventListener( 'click', ( e ) => {
+			e.preventDefault();
+			let id = e.target.parentElement.getAttribute( 'data-id' );
+			let parent = e.target.parentElement;
+	
+			editMoodById( id, div, parent, function () {
+				let editForm = div.querySelector( '.edit-mood-form' );
+				editForm.classList.toggle( 'hide' );
+			} );
+	
+		} )
+	}
+	
+	function renderIdeaAdmin( moodRef, ideaRef ) {
+		
+		let ideasList = document.querySelector( ".idea-list" );
+		let li = document.createElement( 'li' );
+		li.className = 'item mt-3 mb-3';
+		li.innerHTML = `
+			<div class="item-img">
+				<span>
+					<img src="${ideaRef.data().backgroundURL}" alt="${ideaRef.data().background}">
+				</span>
+			</div>
+			<div class="item-info">
+				<div class="ml-3 mb-3 mt-1">
+					<img src="${moodRef.iconURL}" alt="${moodRef.icon}">
+					<span class="small ml-2">${moodRef.name}</span>
+				</div>
+				<div class="item-title ml-3 m-2"><strong>${ideaRef.data().name}</strong></div>
+				<button class="primary-btn goto" type="button" name="button">
+					<a href="../pages/travel-idea.html?idea=${ideaRef.id}">Go to</a>
+					<span>.</span><span>.</span><span>.</span>
+				</button>
 			</div>
 			`;
-	} else {
-		div.className = 'row row-invert';
-		div.innerHTML = `
-			<div class="col col-lg-3 col-md-4">
-				<div class="description">
-				<img src="${moodRef.data().iconURL}" alt="${moodRef.data().icon}">
-				<h5 class="m-3">${moodRef.data().name}</h5>
-				<div class="motto">${moodRef.data().motto}</div>
-				<p>
-				${moodRef.data().description}
-				</p>
-				<button onclick="redirectToMood('${moodRef.id}');" class="secondary-btn unfilled">Choose this mood</button>
-				</div>
-			</div>
-			<div class="col col-lg-9 col-md-8 pr-0">
-				<div class="bg-container" style="background-image: url('${moodRef.data().imageURL}');">
-				</div>
-			</div>
-			`;
+		ideasList.appendChild( li );
+	
+	}
+	
+	function redirectToMood( moodID ) {
+		firebase
+			.firestore()
+			.collection( 'moods' )
+			.doc( moodID )
+			.get()
+			.then( ( moodRef ) => {
+				let redirectLocation = "../pages/travel-mood.html?mood=" + moodRef.data().name;
+				window.location.replace(redirectLocation);
+			});
 	}
 
-	let edit = document.createElement( 'span' );
-	edit.classList.add( 'edit' );
-	edit.textContent = 'Edit';
-	div.appendChild( edit );
-
-	let cross = document.createElement( 'i' );
-	cross.classList.add( 'fa', 'fa-times', 'cross' );
-	cross.setAttribute( 'aria-hidden', 'true' );
-	cross.setAttribute( 'data-toggle', 'tooltip' );
-	cross.setAttribute( 'data-placement', 'top' );
-	cross.setAttribute( 'title', 'Delete' );
-	div.appendChild( cross );
-
-	let deleteShadow = document.createElement( 'div' );
-	deleteShadow.classList.add( 'delete-shadow' );
-	div.appendChild( deleteShadow );
-
-	adminMoods.appendChild( div );
-
-	//deleting data
-	cross.addEventListener( 'click', ( e ) => {
-		e.stopPropagation();
-		let id = e.target.parentElement.getAttribute( 'data-id' );
-		firebase
-		.firestore()
-		.collection( 'moods' )
-		.doc( id )
-		.delete();
-	} )
-
-	// updating data
-	edit.addEventListener( 'click', ( e ) => {
-		e.preventDefault();
-		let id = e.target.parentElement.getAttribute( 'data-id' );
-		let parent = e.target.parentElement;
-
-		editMoodById( id, div, parent, function () {
-			let editForm = div.querySelector( '.edit-mood-form' );
-			editForm.classList.toggle( 'hide' );
-		} );
-
-	} )
-}
-
-function renderIdeaAdmin( moodRef, ideaRef ) {
-	
-	let ideasList = document.querySelector( ".idea-list" );
-	let li = document.createElement( 'li' );
-	li.className = 'item mt-3 mb-3';
-	li.innerHTML = `
-		<div class="item-img">
-			<img src="${ideaRef.data().backgroundURL}" alt="${ideaRef.data().background}">
-		</div>
-		<div class="item-info">
-			<div class="ml-3 mb-3 mt-1">
-				<img src="${moodRef.iconURL}" alt="${moodRef.icon}">
-				<span class="small ml-2">${moodRef.name}</span>
-			</div>
-			<div class="item-title ml-3 m-2"><strong>${ideaRef.data().name}</strong></div>
-			<button class="primary-btn goto" type="button" name="button">
-				<a href="../pages/travel-idea.html?idea=${ideaRef.id}">Go to</a>
-				<span>.</span><span>.</span><span>.</span>
-			</button>
-			<button class="primary-btn add-to-wishlist added" type="button" name="button">
-				<i uk-icon="heart" class="pr-2 pb-1"></i>
-				<span class="">Add to Wishlist</span>
-			</button>
-		</div>
-		`;
-	ideasList.appendChild( li );
-
-}
-
-function redirectToMood( moodID ) {
-	firebase
-		.firestore()
-		.collection( 'moods' )
-		.doc( moodID )
-		.get()
-		.then( ( moodRef ) => {
-			let redirectLocation = "../pages/travel-mood.html?mood=" + moodRef.data().name;
-			window.location.replace(redirectLocation);
-		});
-}
-
-if (admin) {
 	// ADD MOOD
 	const moodsForm = document.querySelector( '#add-mood-form' );
 	// upload mood icon image
@@ -811,8 +1218,8 @@ if (admin) {
 				editForm.innerHTML = `
 						<input type="text" name="edit-name" placeholder="Name" value="${docRef.data().name}" required>
 						<input type="text" name="edit-motto" placeholder="Motto" value="${docRef.data().motto}" required>
-						<input type="text" name="edit-icon" placeholder="Icon" value="${docRef.data().icon}" required>
-						<input type="text" name="edit-image" placeholder="Image" value="${docRef.data().image}" required>
+						<input type="text" name="edit-icon" placeholder="Icon" value="${docRef.data().icon}" style="cursor:not-allowed" readonly>
+						<input type="text" name="edit-image" placeholder="Image" value="${docRef.data().image}" style="cursor:not-allowed" readonly>
 						<textarea type="text" name="edit-description" placeholder="Description" required>${docRef.data().description}</textarea>
 				`;
 				let editSaveBtn = document.createElement( 'button' );
@@ -937,14 +1344,13 @@ if (admin) {
 
 
 /** Getting Moods --  Real time listener */
-function getMoods( change, i ) {
+function getMoods( change, i, user ) {
 	
 	if ( change.type == 'added' ) {				
 
-		if ( admin ) {
+		if ( adminPage ) {
 			renderMoodsAdmin(change.doc, i);
 			renderMoodsSelect(change.doc);
-
 		}
 		if ( moodsHeader ) {
 			renderMoodsHeader( change.doc );
@@ -990,23 +1396,27 @@ function getMoods( change, i ) {
 /** Getting Ideas --  Real time listener */
 function getIdeas( moodRef, change, count, user ) {
 	let moodForIdea = moodRef.find(mood => mood.moodID == change.doc.data().mood);
-	let moodData = moodForIdea.moodData;
-	if ( change.type == 'added' ) {	
-		if( adminIdeas ){
-			renderIdeaAdmin(moodData, change.doc);
-		}
-		if( ideaPage ) {
-			let url = new URL(window.location.href);
-			let searchParams = new URLSearchParams(url.search);
-			let selectedIdeaID = searchParams.get('idea');
-			if( selectedIdeaID == change.doc.id ) {
-				renderIdeaPage(moodData, change.doc, user);
+	if(moodForIdea) {
+		let moodData = moodForIdea.moodData;
+		if ( change.type == 'added' ) {
+	
+			if ( adminPage ) {
+				renderIdeaAdmin(moodData, change.doc);
 			}
-		}
-
-		if( mostRead ) {
-			if( count <= 6 ) {
-				renderMostReadIdeas(moodData, change.doc, count);
+	
+			if ( ideaPage ) {
+				let url = new URL(window.location.href);
+				let searchParams = new URLSearchParams(url.search);
+				let selectedIdeaID = searchParams.get('idea');
+				if( selectedIdeaID == change.doc.id ) {
+					renderIdeaPage(moodData, change.doc, user);
+				}
+			}
+	
+			if ( mostRead ) {
+				if( count <= 6 ) {
+					renderMostReadIdeas(moodData, change.doc, count);
+				}
 			}
 		}
 	}

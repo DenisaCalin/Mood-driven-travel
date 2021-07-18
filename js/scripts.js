@@ -106,25 +106,42 @@ $( "#carouselExample" ).on( "slide.bs.carousel", function ( e ) {
 /** END Slider Resources */
 //////////////////////////
 
-/** Authentication */
-// const formHolder = document.querySelector( ".form-holder" );
-// if ( formHolder ) {
-// 	const signupBtn = formHolder.querySelector( ".form-nav .signup-button" );
-// 	const loginBtn = formHolder.querySelector( ".form-nav .login-button" );
-// 	const form = formHolder.querySelector( ".form-content form" );
+/** Show/Hide Password */
+$('#show-account-password').click(function(){
+	if('password' == $('#account-password').attr('type')) {
+		$('#account-password').prop('type', 'text');
+		$('#show-account-password').html('<i class="far fa-eye-slash"></i>');
+	} else {
+		$('#account-password').prop('type', 'password');
+		$('#show-account-password').html('<i class="far fa-eye"></i>');
+   }
+});
+$('#show-account-old-password').click(function(){
+	if('password' == $('#account-old-password').attr('type')) {
+		$('#account-old-password').prop('type', 'text');
+		$('#show-account-old-password').html('<i class="far fa-eye-slash"></i>');
+	} else {
+		$('#account-old-password').prop('type', 'password');
+		$('#show-account-old-password').html('<i class="far fa-eye"></i>');
+   }
+});
 
-// 	signupBtn.onclick = () => {
-		
-// 	}
+$('#show-signup-password').click(function(){
+	if('password' == $('#signup-password').attr('type')) {
+		$('#signup-password').prop('type', 'text');
+		$('#show-signup-password').html('<i class="far fa-eye-slash"></i>');
+	} else {
+		$('#signup-password').prop('type', 'password');
+		$('#show-signup-password').html('<i class="far fa-eye"></i>');
+   }
+});
 
-// 	loginBtn.onclick = () => {
-		
-// 	}
-// }
-/** END Authentication */
-////////////////////////
-
-// let moduleTitles = document.querySelector(".module-title");
-// moduleTitles.forEach(function(m){
-//   document.write(m);
-// });
+$('#show-login-password').click(function(){
+	if('password' == $('#login-password').attr('type')) {
+		$('#login-password').prop('type', 'text');
+		$('#show-login-password').html('<i class="far fa-eye-slash"></i>');
+	} else {
+		$('#login-password').prop('type', 'password');
+		$('#show-login-password').html('<i class="far fa-eye"></i>');
+   }
+});

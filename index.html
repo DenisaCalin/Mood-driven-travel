@@ -8,8 +8,10 @@
   <title>MoodDriven</title>
   <link rel="icon" type="image/png" href="./assets/images/road-trip.png">
   <link href="https://fonts.googleapis.com/css?family=Megrim|Raleway:300,400,600,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
@@ -154,19 +156,17 @@
             <li class="logged-in">
               <a href="./pages/wishlist.html">Wish List</a>
             </li>
-            <li class="logged-in">
-              <a href="./pages/admin.html">ADMIN</a>
-            </li>
           </ul>
           <!-- logged in -->
           <div class="auth-nav">
-            <button name="account-btn" class="auth-button logged-in" data-toggle="modal" data-target="#modal-account"><i class="far fa-user pr-2"></i></button>
+            <button id="account-btn" name="account-btn" class="auth-button logged-in" data-toggle="modal"
+              data-target="#modal-account"><span><img src=""></span></button>
             <button id="logout-btn" name="logout-btn" class="auth-button bordered-button logged-in">Log Out</button>
           </div>
           <!-- logged out -->
           <div class="auth-nav logged-out">
-            <button name="login-btn" class="auth-button" data-toggle="modal" data-target="#modal-login">Login</button>
-            <button name="signup-btn" class="auth-button bordered-button" data-toggle="modal"
+            <button id="login-btn" class="auth-button" data-toggle="modal" data-target="#modal-login">Login</button>
+            <button id="signup-btn" class="auth-button bordered-button" data-toggle="modal"
               data-target="#modal-signup">Sign Up</button>
           </div>
         </nav>
@@ -195,7 +195,7 @@
             <p class="p-2">Experience</p>
           </div>
         </div>
-        <a href= "./pages/travel-moods.html" class="primary-btn unfilled p-4">PICK YOUR TRAVEL MOOD</a>
+        <a href="./pages/travel-moods.html" class="primary-btn unfilled p-4">PICK YOUR TRAVEL MOOD</a>
       </div>
     </div>
     <section class="most-read">
@@ -218,7 +218,8 @@
         <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
           <div class="carousel-inner row w-100 mx-auto" role="listbox">
             <div class="carousel-item col-md-4 active">
-              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-equipment.png');">
+              <a href="https://www.booking.com/" class="banner" target="_blank"
+                style="background-image: url('./assets/images/banner-equipment.png');">
                 <div class="banner-footer">
                   <button type="button" name="button">Search for equipment</button>
                   <span>Powered by Sports</span>
@@ -226,7 +227,8 @@
               </a>
             </div>
             <div class="carousel-item col-md-4">
-              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-cazare.png');">
+              <a href="https://www.booking.com/" class="banner" target="_blank"
+                style="background-image: url('./assets/images/banner-cazare.png');">
                 <div class="banner-footer">
                   <button type="button" name="button">Search for housing</button>
                   <span>Powered by Booking</span>
@@ -234,7 +236,8 @@
               </a>
             </div>
             <div class="carousel-item col-md-4">
-              <a href="https://www.Airline.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-zbor.png');">
+              <a href="https://www.Airline.com/" class="banner" target="_blank"
+                style="background-image: url('./assets/images/banner-zbor.png');">
                 <div class="banner-footer">
                   <button type="button" name="button">Search for flight</button>
                   <span>Powered by Airline</span>
@@ -242,7 +245,8 @@
               </a>
             </div>
             <div class="carousel-item col-md-4">
-              <a href="https://www.booking.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-masina.png');">
+              <a href="https://www.booking.com/" class="banner" target="_blank"
+                style="background-image: url('./assets/images/banner-masina.png');">
                 <div class="banner-footer">
                   <button type="button" name="button">Search for car</button>
                   <span>Powered by Booking</span>
@@ -250,7 +254,8 @@
               </a>
             </div>
             <div class="carousel-item col-md-4">
-              <a href="https://www.TripGuide.com/" class="banner" target="_blank" style="background-image: url('./assets/images/banner-guide.png');">
+              <a href="https://www.TripGuide.com/" class="banner" target="_blank"
+                style="background-image: url('./assets/images/banner-guide.png');">
                 <div class="banner-footer">
                   <button type="button" name="button">Search for guide</button>
                   <span>Powered by TripGuide</span>
@@ -287,19 +292,40 @@
           <form id="signup-form">
             <div class="input-block">
               <span uk-icon="icon: user"></span>
-              <input id="signup-username" class="custom-input" type="text" name="username" value=""
-                placeholder="Username" required>
-            </div>
-            <div class="input-block">
-              <span uk-icon="icon: mail"></span>
-              <input id="signup-email" class="custom-input" type="email" name="email" value="" placeholder="Email"
+              <input id="signup-username" class="custom-input" type="text" name="username" placeholder="Username"
                 required>
             </div>
             <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input id="signup-password" class="custom-input" type="password" name="password" value=""
-                placeholder="Choose password" required>
+              <span uk-icon="icon: mail"></span>
+              <input id="signup-email" class="custom-input" type="email" name="email" placeholder="Email" required>
             </div>
+            <div id="signup-avatar input-block">
+              <label id="signup-avatar_upload">
+                <input type="file" name="uploadAvatar" id="fileButtonAvatar" accept="image/png, .jpeg, .jpg, image/gif"
+                  hidden>
+                <span>Upload avatar</span>
+              </label>
+              <progress value="0" max="100" id="uploaderAvatar">0%</progress>
+            </div>
+            <div class="input-block">
+              <span uk-icon="icon: camera"></span>
+              <input type="text" name="avatar" class="custom-input" id="signup-avatar_title"
+                placeholder="Uploaded avatar" readonly>
+            </div>
+            <input type="text" name="avatarURL" id="signup-avatar_url" placeholder="Uploaded avatar URL" hidden>
+            <div class="input-block">
+              <span uk-icon="icon: lock"></span>
+              <input id="signup-password" class="custom-input" type="password" name="password" placeholder="Password"
+                required>
+              <span id="show-signup-password" class="show-password"><i class="far fa-eye"></i></span>
+
+            </div>
+            <div class="input-block">
+              <span uk-icon="icon: lock"></span>
+              <input id="signup-password-confirm" class="custom-input" type="password" name="signupPasswordRepeat"
+                placeholder="Confirm Password" required>
+            </div>
+            <div id='signup-error-message'></div>
             <button class="primary-btn filled" name="signup-submit">Create An Account</button>
           </form>
 
@@ -316,7 +342,6 @@
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -341,7 +366,10 @@
               <span uk-icon="icon: lock"></span>
               <input id="login-password" class="custom-input" type="password" name="password" value=""
                 placeholder="Password" required>
+              <span id="show-login-password" class="show-password"><i class="far fa-eye"></i></span>
             </div>
+            <div id='login-error-message'></div>
+
             <button class="primary-btn filled" name="login-submit">Log In</button>
           </form>
         </div>
@@ -359,22 +387,57 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="account-details"></div>
-          <!-- <form id="account-form">
-            <div class="input-block">
-              <span uk-icon="icon: mail"></span>
-              <input id="login-email" class="custom-input" type="email" name="email" value="" placeholder="Email"
-                required>
+          <form id="account-form">
+            <div id="account-avatar input-block">
+              <label id="account-avatar_upload">
+                <input type="file" name="uploadAvatarEdit" id="fileButtonAvatarEdit" accept="image/png, .jpeg, .jpg, image/gif" hidden>
+                <span>Change avatar</span>
+              </label>
+              <progress value="0" max="100" id="uploaderAvatarEdit">0%</progress>
             </div>
             <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input id="login-password" class="custom-input" type="password" name="password" value=""
-                placeholder="Password" required>
+              <span uk-icon="icon: camera"></span>
+              <input type="text" name="avatar" class="custom-input" id="account-avatar_title" placeholder="Uploaded avatar" readonly>
+              <div id='account-avatar-message' rel="tooltip" class="show-message"></div>
             </div>
-            <button class="primary-btn filled" name="login-submit">Log In</button>
-          </form> -->
+
+            <input type="text" name="avatarURL" id="account-avatar_url" placeholder="Uploaded avatar URL" hidden>
+            <div class="input-block">
+              <span uk-icon="icon: user"></span>
+              <input id="account-username" class="custom-input" type="text" name="accountUsername" value="" placeholder="Username" required>
+              <div id='account-username-message' rel="tooltip" class="show-message"></div>
+            </div>
+
+            <div id="sensitive-info-btn" data-toggle="collapse" data-target="#sensitive-info">Change email and password</div>
+            <div id="sensitive-info" class="collapse">
+              <div class="input-block">
+                <span uk-icon="icon: mail"></span>
+                <input id="account-email" class="custom-input" type="email" name="accountEmail" value="" placeholder="Email" required>
+                <div id='account-email-message' rel="tooltip" class="show-message"></div>
+              </div>
+  
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-old-password" class="custom-input" type="password" name="accountOldPassword" value="" placeholder="Current Password">
+                <span id="show-account-old-password" class="show-password"><i class="far fa-eye"></i></span>
+              </div>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-password" class="custom-input" type="password" name="accountPassword" value="" placeholder="New Password">
+                <span id="show-account-password" class="show-password"><i class="far fa-eye"></i></span>
+              </div>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-password-confirm" class="custom-input" type="password" name="accountPasswordConfirm" value="" placeholder="Confirm New Password">
+                <div id='account-new-password-message' rel="tooltip" class="show-message"></div>
+              </div>
+              <div id='account-error-message'></div>
+            </div>
+
+            <button class="primary-btn filled" name="editAccountSubmit">Edit</button>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 
@@ -573,8 +636,8 @@
           <p>This page informs you of our policies regarding the collection, use, and disclosure of personal
             data when you use our Service and the choices you have associated with that data. Our Privacy
             Policy for MoodDrivenTravel is
-            created with the help of the <a
-              href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/">Free Privacy Policy
+            created with the help of the <a href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/">Free
+              Privacy Policy
               Generator</a>.</p>
           <p>We use your data to provide and improve the Service. By using the Service, you agree to the
             collection and use of information in accordance with this policy. Unless otherwise defined in
@@ -877,6 +940,7 @@
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
@@ -904,12 +968,11 @@
       appId: "1:354399978499:web:6d93b9b76e53b60e393a36",
       measurementId: "G-ZCHSFYLF15"
     };
- 
+
     // Initialize Firebase
     firebase.initializeApp( firebaseConfig );
 
     var storage = firebase.storage();
-
   </script>
 
   </script>

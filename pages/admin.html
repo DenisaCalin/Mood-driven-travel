@@ -154,19 +154,17 @@
             <li class="logged-in">
               <a href="../pages/wishlist.html">Wish List</a>
             </li>
-            <li class="logged-in">
-              <a href="../pages/admin.html">ADMIN</a>
-            </li>
           </ul>
           <!-- logged in -->
           <div class="auth-nav">
-            <button name="account-btn" class="auth-button logged-in" data-toggle="modal" data-target="#modal-account"><i class="far fa-user pr-2"></i></button>
+            <button id="account-btn" name="account-btn" class="auth-button logged-in" data-toggle="modal"
+              data-target="#modal-account"><span><img src=""></span></button>
             <button id="logout-btn" name="logout-btn" class="auth-button bordered-button logged-in">Log Out</button>
           </div>
           <!-- logged out -->
           <div class="auth-nav logged-out">
-            <button name="login-btn" class="auth-button" data-toggle="modal" data-target="#modal-login">Login</button>
-            <button name="signup-btn" class="auth-button bordered-button" data-toggle="modal"
+            <button id="login-btn" class="auth-button" data-toggle="modal" data-target="#modal-login">Login</button>
+            <button id="signup-btn" class="auth-button bordered-button" data-toggle="modal"
               data-target="#modal-signup">Sign Up</button>
           </div>
         </nav>
@@ -192,7 +190,7 @@
 				<input type="text" name="motto" placeholder="Motto" required>
 				<div id="add-mood-form_icon">
 					<label id="add-mood-form_icon-upload">
-						<input type="file" name="uploadIcon" id="fileButtonIcon" hidden>
+						<input type="file" name="uploadIcon" id="fileButtonIcon" accept="image/png, .jpeg, .jpg" hidden>
 						<span>Upload icon</span>
 					</label>
 					<progress value="0" max="100" id="uploaderIcon">0%</progress>
@@ -202,7 +200,7 @@
 
 				<div id="add-mood-form_bg">
 					<label id="add-mood-form_bg-upload">
-						<input type="file" name="upload" id="fileButton" hidden>
+						<input type="file" name="upload" id="fileButton" accept="image/png, .jpeg, .jpg" hidden>
 						<span>Upload background image</span>
 					</label>
 					<progress value="0" max="100" id="uploader">0%</progress>
@@ -229,7 +227,7 @@
 				<input type="text" name="ideaName" placeholder="Name" required>
 				<div id="add-idea-form_bg">
 					<label id="add-idea-form_bg-upload">
-						<input type="file" name="uploadIdea" id="fileButtonIdea" hidden>
+						<input type="file" name="uploadIdea" id="fileButtonIdea" accept="image/png, .jpeg, .jpg" hidden>
 						<span>Upload background image</span>
 					</label>
 					<progress value="0" max="100" id="uploaderIdea">0%</progress>
@@ -271,21 +269,42 @@
         </div>
         <div class="modal-body">
           <form id="signup-form">
-            <div class="input-block">
-              <span uk-icon="icon: user"></span>
-              <input id="signup-username" class="custom-input" type="text" name="username" value=""
-                placeholder="Username" required>
+            <div id="signup-avatar input-block">
+              <label id="signup-avatar_upload">
+                <input type="file" name="uploadAvatar" id="fileButtonAvatar" accept="image/png, .jpeg, .jpg"
+                  hidden>
+                <span>Upload avatar</span>
+              </label>
+              <progress value="0" max="100" id="uploaderAvatar">0%</progress>
             </div>
             <div class="input-block">
-              <span uk-icon="icon: mail"></span>
-              <input id="signup-email" class="custom-input" type="email" name="email" value="" placeholder="Email"
+              <span uk-icon="icon: camera"></span>
+              <input type="text" name="avatar" class="custom-input" id="signup-avatar_title"
+                placeholder="Uploaded avatar" readonly>
+            </div>
+            <input type="text" name="avatarURL" id="signup-avatar_url" placeholder="Uploaded avatar URL" hidden>
+            <div class="input-block">
+              <span uk-icon="icon: user"></span>
+              <input id="signup-username" class="custom-input" type="text" name="username" placeholder="Username"
                 required>
             </div>
             <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input id="signup-password" class="custom-input" type="password" name="password" value=""
-                placeholder="Choose password" required>
+              <span uk-icon="icon: mail"></span>
+              <input id="signup-email" class="custom-input" type="email" name="email" placeholder="Email" required>
             </div>
+            <div class="input-block">
+              <span uk-icon="icon: lock"></span>
+              <input id="signup-password" class="custom-input" type="password" name="password" placeholder="Password"
+                required>
+              <span id="show-signup-password" class="show-password"><i class="far fa-eye"></i></span>
+
+            </div>
+            <div class="input-block">
+              <span uk-icon="icon: lock"></span>
+              <input id="signup-password-confirm" class="custom-input" type="password" name="signupPasswordRepeat"
+                placeholder="Confirm Password" required>
+            </div>
+            <div id='signup-error-message'></div>
             <button class="primary-btn filled" name="signup-submit">Create An Account</button>
           </form>
 
@@ -302,7 +321,6 @@
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -327,7 +345,10 @@
               <span uk-icon="icon: lock"></span>
               <input id="login-password" class="custom-input" type="password" name="password" value=""
                 placeholder="Password" required>
+              <span id="show-login-password" class="show-password"><i class="far fa-eye"></i></span>
             </div>
+            <div id='login-error-message'></div>
+
             <button class="primary-btn filled" name="login-submit">Log In</button>
           </form>
         </div>
@@ -345,22 +366,57 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="account-details"></div>
-          <!-- <form id="account-form">
-            <div class="input-block">
-              <span uk-icon="icon: mail"></span>
-              <input id="login-email" class="custom-input" type="email" name="email" value="" placeholder="Email"
-                required>
+          <form id="account-form">
+            <div id="account-avatar input-block">
+              <label id="account-avatar_upload">
+                <input type="file" name="uploadAvatarEdit" id="fileButtonAvatarEdit" accept="image/png, .jpeg, .jpg" hidden>
+                <span>Change avatar</span>
+              </label>
+              <progress value="0" max="100" id="uploaderAvatarEdit">0%</progress>
             </div>
             <div class="input-block">
-              <span uk-icon="icon: lock"></span>
-              <input id="login-password" class="custom-input" type="password" name="password" value=""
-                placeholder="Password" required>
+              <span uk-icon="icon: camera"></span>
+              <input type="text" name="avatar" class="custom-input" id="account-avatar_title" placeholder="Uploaded avatar" readonly>
+              <div id='account-avatar-message' rel="tooltip" class="show-message"></div>
             </div>
-            <button class="primary-btn filled" name="login-submit">Log In</button>
-          </form> -->
+
+            <input type="text" name="avatarURL" id="account-avatar_url" placeholder="Uploaded avatar URL" hidden>
+            <div class="input-block">
+              <span uk-icon="icon: user"></span>
+              <input id="account-username" class="custom-input" type="text" name="accountUsername" value="" placeholder="Username" required>
+              <div id='account-username-message' rel="tooltip" class="show-message"></div>
+            </div>
+
+            <div id="sensitive-info-btn" data-toggle="collapse" data-target="#sensitive-info">Change email and password</div>
+            <div id="sensitive-info" class="collapse">
+              <div class="input-block">
+                <span uk-icon="icon: mail"></span>
+                <input id="account-email" class="custom-input" type="email" name="accountEmail" value="" placeholder="Email" required>
+                <div id='account-email-message' rel="tooltip" class="show-message"></div>
+              </div>
+  
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-old-password" class="custom-input" type="password" name="accountOldPassword" value="" placeholder="Current Password">
+                <span id="show-account-old-password" class="show-password"><i class="far fa-eye"></i></span>
+              </div>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-password" class="custom-input" type="password" name="accountPassword" value="" placeholder="New Password">
+                <span id="show-account-password" class="show-password"><i class="far fa-eye"></i></span>
+              </div>
+              <div class="input-block">
+                <span uk-icon="icon: lock"></span>
+                <input id="account-password-confirm" class="custom-input" type="password" name="accountPasswordConfirm" value="" placeholder="Confirm New Password">
+                <div id='account-new-password-message' rel="tooltip" class="show-message"></div>
+              </div>
+              <div id='account-error-message'></div>
+            </div>
+
+            <button class="primary-btn filled" name="editAccountSubmit">Edit</button>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 
@@ -863,6 +919,7 @@
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>

@@ -733,6 +733,10 @@ section {
   margin: 50px 0;
 }
 
+section.idea {
+  margin: 20px 0px;
+}
+
 section .section-title {
   font-size: 30px;
   color: #182628;
@@ -1077,9 +1081,13 @@ section .section-subtitle {
   box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.5);
 }
 
-.moods img,
+.moods img {
+  max-width: 50px;
+  margin: 10px;
+}
+
 .idea img {
-  max-width: 60px;
+  max-width: 30px;
   margin: 10px;
 }
 
@@ -1153,15 +1161,22 @@ section .section-subtitle {
 }
 
 .item-img {
-  width: 300px;
-  height: auto;
+  display: block;
+}
+
+.item-img span {
+  width: 350px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item-img img {
   width: 100%;
   height: auto;
-  overflow: hidden;
-  border-radius: 10px;
 }
 
 .travel-mood {
@@ -1210,6 +1225,12 @@ ul.idea-list {
   border: none;
 }
 
+.idea-header ul {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
 .idea-header li {
   position: relative;
 }
@@ -1232,12 +1253,6 @@ ul.idea-list {
   margin: 0;
   position: relative;
   padding-bottom: 15px;
-}
-
-.comments .comment-list .comment img {
-  width: 64px;
-  height: 64px;
-  border: 2px solid #e5e7e8;
 }
 
 .comments .comment-list {
@@ -1348,10 +1363,21 @@ footer .copyright {
   align-items: center;
 }
 
+#signup-avatar_upload,
+#account-avatar_upload 
+{
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 2px;
+  margin-right: 30px;
+  background-color: #57BA98;
+  color: #fff;
+}
+
 #add-mood-form_icon-upload,
 #add-mood-form_bg-upload,
 #add-idea-form_bg-upload
- {
+{
   cursor: pointer;
   border: 1px solid rgb(133, 133, 133);
   padding: 5px 10px;
@@ -1373,11 +1399,79 @@ footer .copyright {
 #add-mood-form_bg-title,
 #add-mood-form_bg-url,
 #add-idea-form_bg-title,
-#add-idea-form_bg-url
+#add-idea-form_bg-url,
+#account-avatar_title,
+#signup-avatar_title
 {
   cursor: not-allowed;
 }
 
+.show-password,
+.show-message {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  color: #949595;
+  font-size: 16px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+#account-btn, .user-icon {
+  margin: 0px 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
+  background: none;
+  border: none;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+#account-btn span {
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    width: 35px;
+    height: 35px;
+    display: flex;
+}
+
+.user-icon span {
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 50px;
+  height: 50px;
+  display: flex;
+}
+
+#account-btn span img,
+.user-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.show-password:hover {
+  color:#57BA98;
+}
+
+#account-btn span:hover {
+  border-color: #57BA98;
+}
+
+#sensitive-info-btn {
+  color: #fff;
+  cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  text-decoration: underline;
+}
+
+#sensitive-info-btn:hover {
+  color:#57BA98;
+}
 
 @media (min-width: 768px) {
 
@@ -1534,7 +1628,7 @@ footer .copyright {
     justify-content: flex-start;
     align-items: flex-start;
     position: absolute;
-    top: 170px;
+    top: 190px;
     width: calc(100% - 60px);
     padding: 0;
     padding-bottom: 20px;
@@ -1594,10 +1688,19 @@ footer .copyright {
   }
 
   .auth-nav {
-    margin: 24px auto;
     display: flex;
     flex-direction: column;
+    float: none;
   }
+
+  #account-btn {
+    margin-bottom: 15px;
+  }
+
+  #account-btn span {
+    width: 55px;
+    height: 55px;
+}
 
   .banner-footer {
     flex-direction: column;
@@ -1635,17 +1738,6 @@ footer .copyright {
     font-size: 15px;
   }
 
-  /* .with-auth-form .form-content .with-checkbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-  } */
-
-  /* .with-auth-form .form-content .with-checkbox label {
-    margin: 0 5px;
-  } */
-
   .moods .row-invert {
     flex-direction: column-reverse;
   }
@@ -1681,6 +1773,13 @@ footer .copyright {
   .primary-btn.goto span {
     color: #57BA98;
   }
+
+  .wish-list li, .idea-list li {
+    flex-direction: column;
+  }
+  .wish-list li .item-info, .idea-list li .item-info {
+    max-width: 380px;
+  }
 }
 
 @media (max-width: 425px) {
@@ -1689,6 +1788,10 @@ footer .copyright {
   .overlay .title.title-full {
     font-size: 14px;
     bottom: 20px;
+  }
+
+  section {
+    margin: 0;
   }
 
   footer .motto {
