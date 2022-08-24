@@ -6,11 +6,11 @@ firebase
 	.auth()
 	.onAuthStateChanged( user => {
 		if ( user ) {
-			console.log("USER DATA:")
-			console.log(user.uid);
-			console.log(user.displayName);
-			console.log(user.email);
-			console.log(user.photoURL);
+			// console.log("USER DATA:")
+			// console.log(user.uid);
+			// console.log(user.displayName);
+			// console.log(user.email);
+			// console.log(user.photoURL);
 
 			$( '#account-btn img' ).attr("src", "https://firebasestorage.googleapis.com/v0/b/dc-travel-mood.appspot.com/o/avatars%2Fdefault_avatar_dctravelmood.jpg?alt=media&token=cf88cf89-493a-456f-978e-93a9842ac42d");
 
@@ -23,6 +23,7 @@ firebase
 				}, 3000);
 			}
 
+			$('section.most-read').show();
 
 			if ( admins.includes(user.uid) ) {
 				if (!document.querySelector("#li-admin-access")) {
@@ -196,12 +197,12 @@ if ( signupButton ) {
 							displayName: userName,
 							photoURL: signupForm.avatarURL.value
 							}).then(() => {
-								console.log(profile);
+								// console.log(profile);
 								signupForm.reset();
 								location.reload();
 							}).catch((error) => {
 								$('#signup-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
-							});  
+							});	 
 					})
 					.catch( error => {
 						$('#signup-error-message').html('<i class="fas fa-exclamation"></i> ' + error.message).css('color', 'red');
@@ -362,7 +363,6 @@ if ( accountButton ) {
 		if( currentUser.email != newEmail ) {
 			if(oldPassword == "") {
 				$('#account-error-message').html('<i class="fas fa-exclamation"></i> Current password is required').css('color', 'red');
-				console.log("here");
 			} else {
 				$('#account-error-message').empty();
 	
@@ -682,7 +682,7 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 		let userUID = String(user.uid);
 		let ideaID = String(ideaRef.id);
 
-		console.log(userUID, " => ", ideaID);
+		// console.log(userUID, " => ", ideaID);
 
 		firebase
 		.firestore()
@@ -693,16 +693,16 @@ function renderIdeaPage( moodRef, ideaRef, user ) {
 		.then((querySnapshot) => {
 			if(!querySnapshot.empty){
 				querySnapshot.forEach((doc) => {
-					console.log(doc.data());
+					// console.log(doc.data());
 						addToWishListBtn.addClass("added");
 						$("#add-to-wishlist-btn span").html('Added to Wishlist');
 						addToWishListBtn.prop('disabled', true);
-						console.log("already added");
+						// console.log("already added");
 						// doc.data() is never undefined for query doc snapshots
 				})
 			}
 			else {
-				console.log("not added");
+				// console.log("not added");
 				if ( !addToWishListBtn.hasClass("added") ) {
 
 					addToWishListBtn.one( "click", function() {
@@ -732,7 +732,7 @@ function addToWishlist (userID, ideaRef) {
 		ideaID: ideaRef.id
 	} )
 	.then ( function () {
-		console.log("added to wishlist");
+		// console.log("added to wishlist");
 	})
 }
 
@@ -782,13 +782,13 @@ function renderWishlist (wishlistRef, wishlistItemID) {
 }
 
 function deleteFromWishlist(wishlistItemID) {
-	console.log("to be deleted")
+	// console.log("to be deleted")
 	firebase
 	.firestore()
 	.collection( 'wishlist' )
 	.doc( wishlistItemID )
 	.delete().then( () => {
-		console.log("removed");
+		// console.log("removed");
 	});
 }
 
@@ -896,7 +896,7 @@ if(commentsForm) {
 }
 
 function renderComments(commentRef) {
-	console.log(toTimestamp(new Date().toLocaleString()));
+	// console.log(toTimestamp(new Date().toLocaleString()));
 	const timestamp = commentRef.data().dateAndTime;
 	const dateAndTime = new Date(timestamp * 1000);
 	const year = dateAndTime.getFullYear(); // year
@@ -940,8 +940,8 @@ function renderComments(commentRef) {
 
 	if (commentRef.data().userAvatar) {
 		userAvatar = commentRef.data().userAvatar;
-		console.log("comment");
-		console.log(userAvatar);
+		// console.log("comment");
+		// console.log(userAvatar);
 	}
 	
 	let ideasList = document.querySelector( ".comment-list" );
